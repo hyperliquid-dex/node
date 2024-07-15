@@ -7,10 +7,10 @@ RUN echo '{"chain": "Testnet"}' > ~/visor.json
 ADD https://binaries.hyperliquid.xyz/Testnet/initial_peers.json ~/initial_peers.json
 
 # temporary configuration file (will not be required in future update)
-RUN curl https://binaries.hyperliquid.xyz/Testnet/non_validator_config.json > ~/non_validator_config.json
+ADD https://binaries.hyperliquid.xyz/Testnet/non_validator_config.json ~/non_validator_config.json
 
 # add the binary
-RUN curl https://binaries.hyperliquid.xyz/Testnet/hl-visor > ~/hl-visor && chmod a+x ~/hl-visor
+ADD --chmod=700 https://binaries.hyperliquid.xyz/Testnet/hl-visor ~/hl-visor
 
 # gossip ports
 EXPOSE 9000
