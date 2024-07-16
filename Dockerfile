@@ -8,26 +8,27 @@ ARG USER_GID=$USER_UID
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
     && apt-get update -y && apt-get install curl -y \
-    && mkdir -p /home/hl/hl/data && chown -R $USERNAME:$USERNAME /home/hl/hl
+    && mkdir -p /home/$USERNAME/hl/data && chown -R $USERNAME:$USERNAME /home/$USERNAME/hl
 
 USER $USERNAME
 
-WORKDIR /home/hl
+WORKDIR /home/$USERNAME
 
 # configure chain to testnet
-RUN echo '{"chain": "Testnet"}' > /home/hl/visor.json
+RUN echo '{"chain": "Testnet"}' > /home/$USERNAME/visor.json
 
 # save the public list of peers to connect to
-ADD --chown=10000:10000 https://binaries.hyperliquid.xyz/Testnet/initial_peers.json /home/hl/initial_peers.json
+ADD --chown=$USER_UID:$USER_GID https://binaries.hyperliquid.xyz/Testnet/initial_peers.json /home/$USERNAME/initial_peers.json
 
 # temporary configuration file (will not be required in future update)
-ADD --chown=10000:10000 https://binaries.hyperliquid.xyz/Testnet/non_validator_config.json /home/hl/non_validator_config.json
+ADD --chown=$USER_UID:$USER_GID https://binaries.hyperliquid.xyz/Testnet/non_validator_config.json /home/$USERNAME/non_validator_config.json
 
 # add the binary
-ADD --chown=10000:10000 --chmod=700 https://binaries.hyperliquid.xyz/Testnet/hl-visor /home/hl/hl-visor
+ADD --chown=$USER_UID:$USER_GID --chmod=700 https://binaries.hyperliquid.xyz/Testnet/hl-visor /home/$USERNAME/hl-visor
 
 # gossip ports
 EXPOSE 9000
 EXPOSE 8000
 
-ENTRYPOINT ["/home/hl/hl-visor"]
+# change /home/hl to your 
+ENTRYPOINT $HOME/hl-visor
