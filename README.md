@@ -29,9 +29,22 @@ Download the visor binary, which will spawn and manage the child node process:
 ```
 curl https://binaries.hyperliquid.xyz/Testnet/hl-visor > ~/hl-visor && chmod a+x ~/hl-visor
 ```
+## Create a non-root User
+Add a new user named hluser
+```
+sudo adduser hluser
+```
+Add hluser to the sudo group
+```
+sudo usermod -aG sudo hluser
+```
 
 ## Running
-To start the visor, run `~/hl-visor`. The node process will write data to `~/hl/data`. The network will generate around 20 gb of logs per day, so it is also recommended to archive or delete old files.
+To start the visor, switch to the hluser account
+```
+su - hluser
+```
+Run `~/hl-visor`. The node process will write data to `~/hl/data`. The network will generate around 20 gb of logs per day, so it is also recommended to archive or delete old files.
 
 Blocks parsed as transactions will be streamed to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`
 
