@@ -50,6 +50,20 @@ Blocks parsed as transactions will be streamed to `~/hl/data/replica_cmds/{start
 
 State snapshots will be saved every 10000 blocks to `~/hl/data/periodic_abci_states/{date}/{height}.rmp`
 
+## Running with Docker
+
+To build the node, run:
+
+```bash
+docker compose build
+```
+
+To run the node, run:
+
+```bash
+docker compose up -d
+```
+
 ## Examining the Blockchain data
 The state can be translated to JSON format for examination:
 

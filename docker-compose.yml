@@ -1,0 +1,16 @@
+name: "hyperliquid"
+
+services:
+  node:
+    restart: unless-stopped
+    build: .
+    ports:
+      - "8000:8000"
+      - "9000:9000"
+    volumes:
+      - hl-data:/home/hluser/hl/data
+
+
+volumes:
+  hl-data:
+    driver: local
