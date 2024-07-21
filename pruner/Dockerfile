@@ -7,7 +7,7 @@ ARG USER_GID=$USER_UID
 # create custom user, install dependencies, create data directory
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && apt-get update -y && apt-get install curl cron sendmail -y \
+    && apt-get update -y && apt-get install curl cron -y \
     && mkdir -p /home/$USERNAME/hl/data && mkdir -p /home/$USERNAME/scripts && chown -R $USERNAME:$USERNAME /home/$USERNAME/hl
 
 # Add our scripts
