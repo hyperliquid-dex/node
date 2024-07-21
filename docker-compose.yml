@@ -10,6 +10,12 @@ services:
     volumes:
       - hl-data:/home/hluser/hl/data
 
+  pruner:
+    restart: unless-stopped
+    build: ./pruner
+    volumes:
+      - hl-data:/home/hluser/hl/data
+
 
 volumes:
   hl-data:
