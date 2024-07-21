@@ -17,6 +17,6 @@ COPY cron/ /etc/
 
 # Give execution rights on the cron jobs
 RUN chmod 0644 /etc/cron.d/* && \
-    chmod +x /scripts/* && chown -R $USERNAME:$USERNAME /home/$USERNAME/scripts
+    chmod +x /home/$USERNAME/scripts/* && chown -R $USERNAME:$USERNAME /home/$USERNAME/scripts
 
 CMD ["/usr/sbin/cron", "-f", "-L", "/dev/stdout"]
