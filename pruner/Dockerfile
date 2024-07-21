@@ -8,10 +8,10 @@ ARG USER_GID=$USER_UID
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
     && apt-get update -y && apt-get install curl cron sendmail -y \
-    && mkdir -p /home/$USERNAME/hl/data && mkdir -p /home/$USERNAME/hl/scripts && chown -R $USERNAME:$USERNAME /home/$USERNAME/hl
+    && mkdir -p /home/$USERNAME/hl/data && mkdir -p /home/$USERNAME/scripts && chown -R $USERNAME:$USERNAME /home/$USERNAME/hl
 
 # Add our scripts
-COPY scripts/ /home/$USERNAME/hl/scripts/
+COPY scripts/ /home/$USERNAME/scripts/
 # Add cron file
 COPY cron/ /etc/
 
