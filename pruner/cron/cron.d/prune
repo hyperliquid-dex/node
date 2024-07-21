@@ -1,0 +1,2 @@
+0 3 * * * hluser /bin/bash /scripts/prune.sh >> /proc/1/fd/1 2>&1
+
