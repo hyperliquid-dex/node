@@ -10,11 +10,6 @@ Ports 8000 and 9000 are used for gossip and must be open to the public. Otherwis
 For lowest latency, run the node in Tokyo, Japan.
 
 ## Setup
-Save an initial set of initial peers to connect to, or use the public list:
-```
-curl https://binaries.hyperliquid.xyz/Testnet/initial_peers.json > ~/initial_peers.json
-```
-
 Configure chain to testnet. Mainnet will be available once testing is complete on testnet:
 ```
 echo '{"chain": "Testnet"}' > ~/visor.json
