@@ -31,16 +31,20 @@ curl https://binaries.hyperliquid.xyz/Testnet/hl-visor > ~/hl-visor && chmod a+x
 ```
 
 ## Running
-Run `~/hl-visor`. The node process will write data to `~/hl/data`. With default settings, the network will generate around 20 gb of logs per day, so it is also recommended to archive or delete old files.
+Run `~/hl-visor`. It may take a while as your node navigates the network to find an appropriate peer to stream from. Once you see logs like `applied block X` then your node should be streaming live data. You can inspect the transactions or other data as described below.
+
+## Reading L1 data
+The node process will write data to `~/hl/data`. With default settings, the network will generate around 20 gb of logs per day, so it is also recommended to archive or delete old files.
 
 Blocks parsed as transactions will be streamed to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`
 
 State snapshots will be saved every 10000 blocks to `~/hl/data/periodic_abci_states/{date}/{height}.rmp`
 
-Trades will be streamed to `~/hl/data/node_trades/hourly/{date}/{hour}`. Orders can be streamed as well by running `~/hl-visor --write-order-statuses`. This will write every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`.
+Trades will be streamed to `~/hl/data/node_trades/hourly/{date}/{hour}`.
+
+Orders can be streamed by running `~/hl-visor --write-order-statuses`. This will write every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. Orders can be a substantial amount of data so this flag is off by default.
 
 ## Running with Docker
-
 To build the node, run:
 
 ```bash
