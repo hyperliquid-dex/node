@@ -29,26 +29,15 @@ Download the visor binary, which will spawn and manage the child node process:
 ```
 curl https://binaries.hyperliquid.xyz/Testnet/hl-visor > ~/hl-visor && chmod a+x ~/hl-visor
 ```
-## Create a non-root User
-Add a new user named hluser
-```
-sudo adduser hluser
-```
-Add hluser to the sudo group
-```
-sudo usermod -aG sudo hluser
-```
 
 ## Running
-To start the visor, switch to the hluser account
-```
-su - hluser
-```
-Run `~/hl-visor`. The node process will write data to `~/hl/data`. The network will generate around 20 gb of logs per day, so it is also recommended to archive or delete old files.
+Run `~/hl-visor`. The node process will write data to `~/hl/data`. With default settings, the network will generate around 20 gb of logs per day, so it is also recommended to archive or delete old files.
 
 Blocks parsed as transactions will be streamed to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`
 
 State snapshots will be saved every 10000 blocks to `~/hl/data/periodic_abci_states/{date}/{height}.rmp`
+
+Trades will be streamed to `~/hl/data/node_trades/hourly/{date}/{hour}`. Orders can be streamed as well by running `~/hl-visor --write-order-statuses`. This will write every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`.
 
 ## Running with Docker
 
