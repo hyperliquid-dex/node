@@ -15,18 +15,13 @@ Configure chain to testnet. Mainnet will be available once testing is complete o
 echo '{"chain": "Testnet"}' > ~/visor.json
 ```
 
-For now, the non-validating node requires a configuration file. This will no longer be required in a future update when the node will verify the validator beacon chain from genesis:
-```
-curl https://binaries.hyperliquid.xyz/Testnet/non_validator_config.json > ~/non_validator_config.json
-```
-
 Download the visor binary, which will spawn and manage the child node process:
 ```
 curl https://binaries.hyperliquid.xyz/Testnet/hl-visor > ~/hl-visor && chmod a+x ~/hl-visor
 ```
 
 ## Running
-Run `~/hl-visor`. It may take a while as your node navigates the network to find an appropriate peer to stream from. Once you see logs like `applied block X` then your node should be streaming live data. You can inspect the transactions or other data as described below.
+Run `~/hl-visor run-non-validator`. It may take a while as your node navigates the network to find an appropriate peer to stream from. Once you see logs like `applied block X` then your node should be streaming live data. You can inspect the transactions or other data as described below.
 
 ## Reading L1 data
 The node process will write data to `~/hl/data`. With default settings, the network will generate around 20 gb of logs per day, so it is also recommended to archive or delete old files.
@@ -37,7 +32,7 @@ State snapshots will be saved every 10000 blocks to `~/hl/data/periodic_abci_sta
 
 Trades will be streamed to `~/hl/data/node_trades/hourly/{date}/{hour}`.
 
-Orders can be streamed by running `~/hl-visor --write-order-statuses`. This will write every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. Orders can be a substantial amount of data so this flag is off by default.
+Orders can be streamed by running `~/hl-visor run-non-validator --write-order-statuses`. This will write every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. Orders can be a substantial amount of data so this flag is off by default.
 
 ## Running with Docker
 To build the node, run:
