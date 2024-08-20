@@ -34,6 +34,8 @@ Trades will be streamed to `~/hl/data/node_trades/hourly/{date}/{hour}`.
 
 Orders can be streamed by running `~/hl-visor run-non-validator --write-order-statuses`. This will write every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. Orders can be a substantial amount of data so this flag is off by default.
 
+EVM RPC can be enabled by passing the --evm flag `~/hl-visor run-non-validator --evm`. Once running you can send evm post requests to localhost port 3001. E.g. `curl -X POST --header 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false],"id":1}' http://localhost:3001/evm`
+
 ## Running with Docker
 To build the node, run:
 
