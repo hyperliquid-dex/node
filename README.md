@@ -41,7 +41,24 @@ Trades will be streamed to `~/hl/data/node_trades/hourly/{date}/{hour}`.
 Orders can be streamed by running `~/hl-visor run-non-validator --write-order-statuses`. This will write every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. Orders can be a substantial amount of data so this flag is off by default.
 
 ## EVM
-EVM RPC can be enabled by passing the --evm flag `~/hl-visor run-non-validator --evm`. Once running you can send evm post requests to localhost port 3001. E.g. `curl -X POST --header 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false],"id":1}' http://localhost:3001/evm`
+EVM RPC can be enabled by passing the --evm flag `~/hl-visor run-non-validator --evm`. Once running, requests can be sent as follows: `curl -X POST --header 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false],"id":1}' http://localhost:3001/evm`
+
+## Delegation
+The native token on testnet is TESTH with token address `0x65af5d30d57264645731588b2ebfa8e3`. The token can be delegated by running
+```
+./hl-node --chain Testnet --key <delegator-wallet-key> delegate <validator-address> <amount-in-wei>
+```
+Optionally `--undelegate` can be passed to undelegate from the validator.
+
+Delegations can be seen by running
+```
+curl -X POST --header "Content-Type: application/json" --data '{ "type": "delegations", "user": <delegator-address>}' https://api.hyperliquid-testnet.xyz/info
+```
+
+Staking withdrawals are subject to a queue of 1 week to allow for slashing in the case of malicious behavior. Rewards are sent to the unwithdrawn balance at the end of each epoch. Information about pending withdrawals and rewards can be seen by running
+```
+curl -X POST --header "Content-Type: application/json" --data '{ "type": "delegatorSummary", "user": <delegator-address>}' https://api.hyperliquid-testnet.xyz/info
+```
 
 ## Running a validating node
 The non-validating node setup above is a prerequisite for running a validating node.
@@ -58,7 +75,7 @@ In the commands below, `<node-wallet-key>` is the hex string in the config file 
 The validator address should have non-zero perps USDC balance, or it will not be able to send the signed actions to register as a validator.
 This command prints the validator user:
 ```
-~/hl-node --chain Testnet print-address <node-wallet-key>
+~/hl-node --chain Testnet --key <node-wallet-key> print-address
 ```
 
 ### Join network
@@ -66,7 +83,7 @@ During the initial phase of testing, the validator address from the previous ste
 
 Register public IP address of validator, along with display name and description:
 ```
-~/hl-node --chain Testnet send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "name": "...", "description": "..." }}}' <node-wallet-key>
+~/hl-node --chain Testnet --key <node-wallet-key> send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "name": "...", "description": "..." }}}'
 ```
 
 Make sure ports 4000, 5000, 6000, 7000, 8000, 9000 are open to the validators. Either open the ports to the public, or keep a firewall allowing the validators which are found in `c_staking` in the state snapshots. Note that the validator set and IPs are dynamic.
@@ -84,12 +101,12 @@ echo '{ "root_node_ips": [{"Ip": "1.2.3.4"}], "try_new_peers": false }' > ~/over
 ### Begin validating
 For now, registering and changing IP address automatically jails the validator so that it does not participate in consensus initially. When the expected outputs are streaming to `~/hl/data/consensus{wallet_user}/{date}`, send the following action to begin participating in consensus:
 ```
-~/hl-node --chain Testnet send-signed-action '{"type": "CValidatorAction", "unjailSelf": null}' <node-wallet-key>
+~/hl-node --chain Testnet --key <node-wallet-key> send-signed-action '{"type": "CValidatorAction", "unjailSelf": null}'
 ```
 
 To exit consensus, run the following command to "self jail" and wait for the validator to leave the active set before shutting down.
 ```
-~/hl-node --chain Testnet send-signed-action '{"type": "CValidatorAction", "jailSelf": null}' <node-wallet-key>
+~/hl-node --chain Testnet --key <node-wallet-key> send-signed-action '{"type": "CValidatorAction", "jailSelf": null}'
 ```
 
 ## Misc
@@ -100,10 +117,10 @@ curl -X POST --header "Content-Type: application/json" --data '{ "type": "valida
 
 Change validator profile if already registered:
 ```
-~/hl-node --chain Testnet send-signed-action '{"type": "CValidatorAction", "changeProfile": {"node_ip": {"Ip": "1.2.3.4"}, "name": "..."}}' <node-wallet-key>
+~/hl-node --chain Testnet --key <node-wallet-key> send-signed-action '{"type": "CValidatorAction", "changeProfile": {"node_ip": {"Ip": "1.2.3.4"}, "name": "..."}}'
 ```
 
-## Running with Docker
+### Running with Docker
 To build the node, run:
 
 ```bash
@@ -116,5 +133,5 @@ To run the node, run:
 docker compose up -d
 ```
 
-## Troubleshooting
+### Troubleshooting
 Crash logs from the child process will be written to `~/hl/data/visor_child_stderr/{date}/{node_binary_index}`
