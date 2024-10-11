@@ -95,7 +95,7 @@ To debug an issue, it is often easier to run `./hl-node run-validator` to immedi
 
 The validator bootstraps the state with a non-validator first. To use a known reliable peer for faster bootstrapping:
 ```
-echo '{ "root_node_ips": [{"Ip": "1.2.3.4"}], "try_new_peers": false }' > ~/override_gossip_config.json
+echo '{ "root_node_ips": [{"Ip": "1.2.3.4"}], "try_new_peers": false, "chain": "Testnet" }' > ~/override_gossip_config.json
 ```
 
 ### Begin validating
