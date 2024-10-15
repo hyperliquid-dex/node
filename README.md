@@ -55,10 +55,16 @@ Delegations can be seen by running
 curl -X POST --header "Content-Type: application/json" --data '{ "type": "delegations", "user": <delegator-address>}' https://api.hyperliquid-testnet.xyz/info
 ```
 
-Staking withdrawals are subject to a queue of 1 week to allow for slashing in the case of malicious behavior. Rewards are sent to the unwithdrawn balance at the end of each epoch. Information about pending withdrawals and rewards can be seen by running
+Staking withdrawals are subject to a 5 minute unbonding queue to allow for slashing in the case of malicious behavior. Rewards are sent to the unwithdrawn balance at the end of each epoch. Information about pending withdrawals and rewards can be seen by running
 ```
 curl -X POST --header "Content-Type: application/json" --data '{ "type": "delegatorSummary", "user": <delegator-address>}' https://api.hyperliquid-testnet.xyz/info
 ```
+
+To initiate a staking withdrawal:
+```
+./hl-node --chain Testnet --key <delegator-wallet-key> staking-withdrawal <wei>
+```
+The withdrawal will be reflected in the exchange balance automatically once the unbonding period ends.
 
 ## Running a validating node
 The non-validating node setup above is a prerequisite for running a validating node.
