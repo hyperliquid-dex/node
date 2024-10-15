@@ -65,11 +65,11 @@ The non-validating node setup above is a prerequisite for running a validating n
 
 ### Generate config
 
-Generate a validator wallet (use a securely generated key):
+Generate a validator wallet (use a cryptographically secure key, e.g. the output of `openssl rand -hex 32`):
 ```
-echo '{"key": "8888888888888888888888888888888888888888888888888888888888888888"}' > ~/hl/hyperliquid_data/node_config.json
+echo '{"key": "<node-wallet-key>"}' > ~/hl/hyperliquid_data/node_config.json
 ```
-In the commands below, `<node-wallet-key>` is the hex string in the config file above.
+In the commands below, `<node-wallet-key>` is the same hex string in the config file above.
 
 ### Ensure validator user exists
 The validator address should have non-zero perps USDC balance, or it will not be able to send the signed actions to register as a validator.
