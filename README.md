@@ -5,7 +5,7 @@ Recommended hardware: 4 CPU cores, 16 gb RAM, 50 gb disk.
 
 Currently only Ubuntu 24.04 is supported.
 
-Ports 8000 and 9000 are used for gossip and must be open to the public. Otherwise the node IP address will be deprioritized by peers in the p2p network.
+Ports 4001 and 4002 are used for gossip and must be open to the public. Otherwise the node IP address will be deprioritized by peers in the p2p network.
 
 For lowest latency, run the node in Tokyo, Japan.
 
@@ -86,7 +86,7 @@ Register public IP address of validator, along with display name and description
 ~/hl-node --chain Testnet --key <node-wallet-key> send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "name": "...", "description": "..." }}}'
 ```
 
-Make sure ports 4000, 5000, 6000, 7000, 8000, 9000 are open to the validators. Either open the ports to the public, or keep a firewall allowing the validators which are found in `c_staking` in the state snapshots. Note that the validator set and IPs are dynamic.
+Make sure ports 4000-4010 are open to other validators (currently only ports 4001-4006 are used, but additional ports in the range 4000-4010 may be used in the future). Either open the ports to the public, or keep a firewall allowing the validators which are found in `c_staking` in the state snapshots. Note that the validator set and IPs are dynamic.
 
 ### Run the validator
 Run the validator using the visor binary to pick up updates `curl https://binaries.hyperliquid.xyz/Testnet/hl-visor > hl-visor && ./hl-visor run-validator`
