@@ -5,8 +5,8 @@ services:
     restart: unless-stopped
     build: .
     ports:
-      - "8000:8000"
-      - "9000:9000"
+      - "4001:4001"
+      - "4002:4002"
     volumes:
       - hl-data:/home/hluser/hl/data
 
