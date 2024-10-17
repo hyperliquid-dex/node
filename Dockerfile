@@ -27,8 +27,8 @@ ADD --chown=$USER_UID:$USER_GID https://binaries.hyperliquid.xyz/Testnet/non_val
 ADD --chown=$USER_UID:$USER_GID --chmod=700 https://binaries.hyperliquid.xyz/Testnet/hl-visor /home/$USERNAME/hl-visor
 
 # gossip ports
-EXPOSE 9000
-EXPOSE 8000
+EXPOSE 4001
+EXPOSE 4002
 
 # run a non-validating node
 ENTRYPOINT $HOME/hl-visor run-non-validator
