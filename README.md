@@ -107,15 +107,15 @@ echo '{ "root_node_ips": [{"Ip": "1.2.3.4"}], "try_new_peers": false, "chain": "
 ### Begin validating
 For now, registering and changing IP address automatically jails the validator so that it does not participate in consensus initially. When the expected outputs are streaming to `~/hl/data/consensus{wallet_user}/{date}`, send the following action to begin participating in consensus:
 ```
-~/hl-node --chain Testnet --key <node-wallet-key> send-signed-action '{"type": "CSignerAction", "unjailSelf": null}'
+~/hl-node --chain Testnet --key <hot-signer-key> send-signed-action '{"type": "CSignerAction", "unjailSelf": null}'
 ```
 
 To exit consensus, run the following command to "self jail" and wait for the validator to leave the active set before shutting down.
 ```
-~/hl-node --chain Testnet --key <node-wallet-key> send-signed-action '{"type": "CSignerAction", "jailSelf": null}'
+~/hl-node --chain Testnet --key <hot-signer-key> send-signed-action '{"type": "CSignerAction", "jailSelf": null}'
 ```
 
-Note: if a separate signer is set in the validator profile, pass in the hot wallet signer key instead.
+If no separate signer is set in the validator profile, pass in the usually `<node-wallet-key>`.
 
 ## Misc
 See information about the current validators:
@@ -131,7 +131,7 @@ Change validator profile if already registered:
 Other validator profile options:
 - `disable_delegations`: Disables delegations when this is set to true.
 - `commission_bps`: Amount of the staking rewards the validator takes before the remainder is distributed proportionally to stake delegated. Defaults to 10000 (all rewards go to the validator) and is not allowed to increase.
-- `signer`: Allows the validator to set a hot address for signing messages in consensus.
+- `signer`: Allows the validator to set a hot address for signing consensus messages.
 
 ### Running with Docker
 To build the node, run:
