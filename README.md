@@ -115,7 +115,7 @@ To exit consensus, run the following command to "self jail" and wait for the val
 ~/hl-node --chain Testnet --key <hot-signer-key> send-signed-action '{"type": "CSignerAction", "jailSelf": null}'
 ```
 
-If no separate signer is set in the validator profile, pass in the usually `<node-wallet-key>`.
+If no separate signer is set in the validator profile, pass in the usual `<node-wallet-key>`.
 
 ## Misc
 See information about the current validators:
