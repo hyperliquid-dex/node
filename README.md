@@ -71,25 +71,26 @@ The non-validating node setup above is a prerequisite for running a validating n
 
 ### Generate config
 
-Generate a validator wallet (use a cryptographically secure key, e.g. the output of `openssl rand -hex 32`):
+Generate two wallets: a validator wallet and a signer wallet (use cryptographically secure keys, e.g. the output of `openssl rand -hex 32`). The validator wallet is "cold" in the sense that it holds funds and receives delegation rewards. The signer wallet is "hot" in the sense that it is used only for signing consensus messages. They can be the same wallet for simplicity.
 ```
-echo '{"key": "<node-wallet-key>"}' > ~/hl/hyperliquid_data/node_config.json
+echo '{"key": "<signer-wallet-key>"}' > ~/hl/hyperliquid_data/node_config.json
 ```
-In the commands below, `<node-wallet-key>` is the same hex string in the config file above.
+In the commands below, `<signer-wallet-key>` is the same hex string in the config file above and `<validator-wallet-key>` is analogous (do not lose either key).
 
 ### Ensure validator user exists
-The validator address should have non-zero perps USDC balance, or it will not be able to send the signed actions to register as a validator.
-This command prints the validator user:
+Both the signer address and the validator address should have non-zero perps USDC balance, or they will not be able to send the signed actions to register as a validator or otherwise operate properly.
+These command print the addresses:
 ```
-~/hl-node --chain Testnet --key <node-wallet-key> print-address
+~/hl-node --chain Testnet --key <signer-wallet-key> print-address
+~/hl-node --chain Testnet --key <validator-wallet-key> print-address
 ```
 
 ### Join network
 During the initial phase of testing, the validator address from the previous step needs to be whitelisted.
 
-Register public IP address of validator, along with display name and description:
+Register public IP and signer address of validator, along with display name and description:
 ```
-~/hl-node --chain Testnet --key <node-wallet-key> send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "name": "...", "description": "..." }}}'
+~/hl-node --chain Testnet --key <validator-wallet-key> send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "signer": "<signer-address>", "name": "...", "description": "..." }}}'
 ```
 
 Make sure ports 4000-4010 are open to other validators (currently only ports 4001-4006 are used, but additional ports in the range 4000-4010 may be used in the future). Either open the ports to the public, or keep a firewall allowing the validators which are found in `c_staking` in the state snapshots. Note that the validator set and IPs are dynamic.
@@ -107,15 +108,13 @@ echo '{ "root_node_ips": [{"Ip": "1.2.3.4"}], "try_new_peers": false, "chain": "
 ### Begin validating
 For now, registering and changing IP address automatically jails the validator so that it does not participate in consensus initially. When the expected outputs are streaming to `~/hl/data/consensus{wallet_user}/{date}`, send the following action to begin participating in consensus:
 ```
-~/hl-node --chain Testnet --key <hot-signer-key> send-signed-action '{"type": "CSignerAction", "unjailSelf": null}'
+~/hl-node --chain Testnet --key <signer-wallet-key> send-signed-action '{"type": "CSignerAction", "unjailSelf": null}'
 ```
 
 To exit consensus, run the following command to "self jail" and wait for the validator to leave the active set before shutting down.
 ```
-~/hl-node --chain Testnet --key <hot-signer-key> send-signed-action '{"type": "CSignerAction", "jailSelf": null}'
+~/hl-node --chain Testnet --key <signer-wallet-key> send-signed-action '{"type": "CSignerAction", "jailSelf": null}'
 ```
-
-If no separate signer is set in the validator profile, pass in the usual `<node-wallet-key>`.
 
 ## Misc
 See information about the current validators:
