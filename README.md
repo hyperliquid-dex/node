@@ -106,7 +106,7 @@ echo '{ "root_node_ips": [{"Ip": "1.2.3.4"}], "try_new_peers": false, "chain": "
 ```
 
 ### Begin validating
-For now, registering and changing IP address automatically jails the validator so that it does not participate in consensus initially. When the expected outputs are streaming to `~/hl/data/consensus{wallet_user}/{date}`, send the following action to begin participating in consensus:
+For now, registering and changing IP address automatically jails the validator so that it does not participate in consensus initially. When the expected outputs are streaming to `~/hl/data/node_logs/consensus/hourly/{date}/{hour}`, send the following action to begin participating in consensus:
 ```
 ~/hl-node --chain Testnet --key <signer-wallet-key> send-signed-action '{"type": "CSignerAction", "unjailSelf": null}'
 ```
