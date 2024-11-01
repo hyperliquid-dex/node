@@ -33,7 +33,7 @@ State snapshots will be saved every 10000 blocks to `~/hl/data/periodic_abci_sta
 The state can be translated to JSON format for examination:
 
 ```
-./hl-node translate-abci-state ~/hl/data/periodic_abci_states/{date}/{height}.rmp /tmp/out.json
+./hl-node --chain Testnet translate-abci-state ~/hl/data/periodic_abci_states/{date}/{height}.rmp /tmp/out.json
 ```
 
 Trades will be streamed to `~/hl/data/node_trades/hourly/{date}/{hour}`.
@@ -98,7 +98,7 @@ Make sure ports 4000-4010 are open to other validators (currently only ports 400
 ### Run the validator
 Run the validator using the visor binary to pick up updates `curl https://binaries.hyperliquid.xyz/Testnet/hl-visor > hl-visor && ./hl-visor run-validator`
 
-To debug an issue, it is often easier to run `./hl-node run-validator` to immediately see stderr and disable restarts.
+To debug an issue, it is often easier to run `./hl-node --chain Testnet run-validator` to immediately see stderr and disable restarts.
 
 The validator bootstraps the state with a non-validator first. To use a known reliable peer for faster bootstrapping:
 ```
