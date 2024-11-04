@@ -73,16 +73,16 @@ The non-validating node setup above is a prerequisite for running a validating n
 
 Generate two wallets: a validator wallet and a signer wallet (use cryptographically secure keys, e.g. the output of `openssl rand -hex 32`). The validator wallet is "cold" in the sense that it holds funds and receives delegation rewards. The signer wallet is "hot" in the sense that it is used only for signing consensus messages. They can be the same wallet for simplicity.
 ```
-echo '{"key": "<signer-wallet-key>"}' > ~/hl/hyperliquid_data/node_config.json
+echo '{"key": "<signer-key>"}' > ~/hl/hyperliquid_data/node_config.json
 ```
-In the commands below, `<signer-wallet-key>` is the same hex string in the config file above and `<validator-wallet-key>` is analogous (do not lose either key).
+In the commands below, `<signer-key>` is the same hex string in the config file above and `<validator-key>` is analogous (do not lose either key).
 
 ### Ensure validator user exists
 Both the signer address and the validator address should have non-zero perps USDC balance, or they will not be able to send the signed actions to register as a validator or otherwise operate properly.
 These command print the addresses:
 ```
-~/hl-node --chain Testnet --key <signer-wallet-key> print-address
-~/hl-node --chain Testnet --key <validator-wallet-key> print-address
+~/hl-node --chain Testnet --key <signer-key> print-address
+~/hl-node --chain Testnet --key <validator-key> print-address
 ```
 
 ### Join network
@@ -90,7 +90,7 @@ During the initial phase of testing, the validator address from the previous ste
 
 Register public IP and signer address of validator, along with display name and description. On testnet, self-delegate 1 TESTH to run the validator.
 ```
-~/hl-node --chain Testnet --key <validator-wallet-key> send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "signer": "<signer-address>", "name": "...", "description": "..." }, initial_wei: 100000}}'
+~/hl-node --chain Testnet --key <validator-key> send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "signer": "<signer-address>", "name": "...", "description": "..." }, initial_wei: 100000}}'
 ```
 
 Make sure ports 4000-4010 are open to other validators (currently only ports 4001-4006 are used, but additional ports in the range 4000-4010 may be used in the future). Either open the ports to the public, or keep a firewall allowing the validators which are found in `c_staking` in the state snapshots. Note that the validator set and IPs are dynamic.
@@ -108,13 +108,35 @@ echo '{ "root_node_ips": [{"Ip": "1.2.3.4"}], "try_new_peers": false, "chain": "
 ### Begin validating
 For now, registering and changing IP address automatically jails the validator so that it does not participate in consensus initially. When the expected outputs are streaming to `~/hl/data/node_logs/consensus/hourly/{date}/{hour}`, send the following action to begin participating in consensus:
 ```
-~/hl-node --chain Testnet --key <signer-wallet-key> send-signed-action '{"type": "CSignerAction", "unjailSelf": null}'
+~/hl-node --chain Testnet --key <signer-key> send-signed-action '{"type": "CSignerAction", "unjailSelf": null}'
 ```
 
 To exit consensus, run the following command to "self jail" and wait for the validator to leave the active set before shutting down.
 ```
-~/hl-node --chain Testnet --key <signer-wallet-key> send-signed-action '{"type": "CSignerAction", "jailSelf": null}'
+~/hl-node --chain Testnet --key <signer-key> send-signed-action '{"type": "CSignerAction", "jailSelf": null}'
 ```
+
+### Jailing
+Performance and uptime are critical for the mainnet L1. To achieve this, a key feature of HyperBFT consensus is "jailing." When a validator is jailed, it can still participate in the consensus network by forwarding messages to peers, but does not vote on or propose blocks. To avoid jailing, it is recommended to achieve 200ms two-way latency to at least 1/3 of validators by stake.
+
+Once a validator is jailed, it can only be unjailed through the `unjailSelf` action described above. This action will only succeed if the L1 time is later than the "jailed until" time of the validator. Self-jailing does not advance the "jailed until" duration, and is therefore the only way to disable a validator without penalty.
+
+To debug a validator that repeatedly gets jailed, first check stdout for signs of crashing or other unusual logs. If the binary is running without problems, logs in `~/hl/data/node_logs/status/` may be helpful to debug latencies to other validators or other connectivity issues.
+
+### Alerting
+It is recommended for validators to set up an alerting system to maintain optimal uptime.
+
+To configure Slack to alert on critical messages:
+```
+echo '{"testnet_slack_channel": "C000...", "slack_key": "Bearer xoxb-..."}' > ~/hl/api_secrets.json
+```
+
+Test the Slack alert configuration:
+```
+~/hl-node --chain Testnet send-slack-alert "hello hyperliquid"
+```
+
+Alternative alerting systems can be configured by filtering to the lines in stdout at level `CRIT`.
 
 ## Misc
 See information about the current validators:
@@ -124,7 +146,7 @@ curl -X POST --header "Content-Type: application/json" --data '{ "type": "valida
 
 Change validator profile if already registered:
 ```
-~/hl-node --chain Testnet --key <node-wallet-key> send-signed-action '{"type": "CValidatorAction", "changeProfile": {"node_ip": {"Ip": "1.2.3.4"}, "name": "..."}}'
+~/hl-node --chain Testnet --key <validator-key> send-signed-action '{"type": "CValidatorAction", "changeProfile": {"node_ip": {"Ip": "1.2.3.4"}, "name": "..."}}'
 ```
 
 Other validator profile options:
