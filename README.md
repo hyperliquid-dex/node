@@ -26,7 +26,7 @@ Run `~/hl-visor run-non-validator`. It may take a while as the node navigates th
 ## Reading L1 data
 The node process will write data to `~/hl/data`. With default settings, the network will generate around 20 gb of logs per day, so it is also recommended to archive or delete old files.
 
-Blocks parsed as transactions will be streamed to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`
+Blocks parsed as transactions will be streamed to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`.
 
 State snapshots will be saved every 10000 blocks to `~/hl/data/periodic_abci_states/{date}/{height}.rmp`
 
@@ -36,12 +36,20 @@ The state can be translated to JSON format for examination:
 ./hl-node --chain Testnet translate-abci-state ~/hl/data/periodic_abci_states/{date}/{height}.rmp /tmp/out.json
 ```
 
-Trades will be streamed to `~/hl/data/node_trades/hourly/{date}/{hour}`.
+### Flags
+Certain flags can be turned on when running validators or non-validators:
+- `--write-trades` will stream trades to `~/hl/data/node_trades/hourly/{date}/{hour}`.
+- `--write-order-statuses` will write every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. Orders can be a substantial amount of data.
+- `--write-replica-cmd-resps` will write down the full API responses to transactions in blocks in addition to the transactions themselves in `~/hl/data/replica_cmds/{start_time}/{date}/{height}`.
+- `--serve-eth-rpc` enables the EVM rpc. More details in the following section.
 
-Orders can be streamed by running `~/hl-visor run-non-validator --write-order-statuses`. This will write every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. Orders can be a substantial amount of data so this flag is off by default.
+For example, to run a non-validator with all flags enabled:
+```
+~/hl-visor run-non-validator --write-trades --write-order-statuses --write-replica-cmd-resps --serve-eth-rpc
+```
 
 ## EVM
-EVM RPC can be enabled by passing the --evm flag `~/hl-visor run-non-validator --evm`. Once running, requests can be sent as follows: `curl -X POST --header 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false],"id":1}' http://localhost:3001/evm`
+EVM RPC can be enabled by passing the `--serve-eth-rpc` flag `~/hl-visor run-non-validator --serve-eth-rpc`. Once running, requests can be sent as follows: `curl -X POST --header 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false],"id":1}' http://localhost:3001/evm`
 
 ## Delegation
 The native token on testnet is TESTH with token address `0x65af5d30d57264645731588b2ebfa8e3`. The token can be delegated by running
