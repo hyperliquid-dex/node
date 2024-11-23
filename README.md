@@ -40,7 +40,7 @@ The state can be translated to JSON format for examination:
 Certain flags can be turned on when running validators or non-validators:
 - `--write-trades` will stream trades to `~/hl/data/node_trades/hourly/{date}/{hour}`.
 - `--write-order-statuses` will write every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. Orders can be a substantial amount of data.
-- `--write-replica-cmd-resps` will write down the full API responses to transactions in blocks in addition to the transactions themselves in `~/hl/data/replica_cmds/{start_time}/{date}/{height}`.
+- `--replica-cmds-style` configures what is written down to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`. Possible values are `actions` for only actions (default), `actions-and-responses` for actions and responses, and `recent-actions` which is the same as `actions` but only preserving the two latest height files.
 - `--serve-eth-rpc` enables the EVM rpc. More details in the following section.
 
 For example, to run a non-validator with all flags enabled:
