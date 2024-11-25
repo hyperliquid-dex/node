@@ -52,7 +52,14 @@ For example, to run a non-validator with all flags enabled:
 EVM RPC can be enabled by passing the `--serve-eth-rpc` flag `~/hl-visor run-non-validator --serve-eth-rpc`. Once running, requests can be sent as follows: `curl -X POST --header 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false],"id":1}' http://localhost:3001/evm`
 
 ## Delegation
-The native token on testnet is TESTH with token address `0x65af5d30d57264645731588b2ebfa8e3`. The token can be delegated by running
+The native token on testnet is TESTH with token address `0x65af5d30d57264645731588b2ebfa8e3`.
+
+Delegations occur from the staking balance, which is separate from the spot balance. The token can be transferred from the spot balance into the staking balance by running
+```
+./hl-node --chain Testnet --key <delegator-wallet-key> staking-deposit <wei>
+```
+
+The token can be delegated by running
 ```
 ./hl-node --chain Testnet --key <delegator-wallet-key> delegate <validator-address> <amount-in-wei>
 ```
