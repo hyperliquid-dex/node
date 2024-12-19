@@ -103,9 +103,9 @@ These command print the addresses:
 ### Join network
 During the initial phase of testing, the validator address from the previous step needs to be whitelisted.
 
-Register public IP and signer address of validator, along with display name and description. On testnet, self-delegate 1 HYPE to run the validator.
+Register public IP and signer address of validator, along with display name and description. On testnet, self-delegate 10000 HYPE(1000000000000 wei) to run the validator.
 ```
-~/hl-node --chain Testnet --key <validator-key> send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "signer": "<signer-address>", "name": "...", "description": "..." }, "initial_wei": 100000}}'
+~/hl-node --chain Testnet --key <validator-key> send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "signer": "<signer-address>", "name": "...", "description": "..." }, "initial_wei": 1000000000000}}'
 ```
 
 Make sure ports 4000-4010 are open to other validators (currently only ports 4001-4006 are used, but additional ports in the range 4000-4010 may be used in the future). Either open the ports to the public, or keep a firewall allowing the validators which are found in `c_staking` in the state snapshots. Note that the validator set and IPs are dynamic.
