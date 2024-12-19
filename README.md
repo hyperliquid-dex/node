@@ -45,7 +45,7 @@ Certain flags can be turned on when running validators or non-validators:
 
 For example, to run a non-validator with all flags enabled:
 ```
-~/hl-visor run-non-validator --write-trades --write-order-statuses --write-replica-cmd-resps --serve-eth-rpc
+~/hl-visor run-non-validator --write-trades --write-order-statuses --serve-eth-rpc
 ```
 
 ## EVM
