@@ -101,9 +101,10 @@ These command print the addresses:
 ```
 
 ### Join network
-During the initial phase of testing, the validator address from the previous step needs to be whitelisted.
+The validator set on testnet is entirely permissionless.
 
-Register public IP and signer address of validator, along with display name and description. On testnet, self-delegate 10000 HYPE(1000000000000 wei) to run the validator.
+Register public IP and signer address of validator, along with display name and description. On testnet, self-delegate 10_000 (1000000000000 wei) to run the validator.
+
 ```
 ~/hl-node --chain Testnet --key <validator-key> send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "signer": "<signer-address>", "name": "...", "description": "..." }, "initial_wei": 1000000000000}}'
 ```
