@@ -170,6 +170,11 @@ Other validator profile options:
 - `commission_bps`: Amount of the staking rewards the validator takes before the remainder is distributed proportionally to stake delegated. Defaults to 10000 (all rewards go to the validator) and is not allowed to increase.
 - `signer`: Allows the validator to set a hot address for signing consensus messages.
 
+Unregister validator:
+```
+~/hl-node --chain Testnet --key <signer-key> send-signed-action '{"type": "CValidatorAction", "unregister": {}}'
+```
+
 ### Running with Docker
 To build the node, run:
 
