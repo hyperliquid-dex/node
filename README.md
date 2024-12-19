@@ -45,7 +45,7 @@ Certain flags can be turned on when running validators or non-validators:
 
 For example, to run a non-validator with all flags enabled:
 ```
-~/hl-visor run-non-validator --write-trades --write-order-statuses --write-replica-cmd-resps --serve-eth-rpc
+~/hl-visor run-non-validator --write-trades --write-order-statuses --serve-eth-rpc
 ```
 
 ## EVM
@@ -101,9 +101,10 @@ These command print the addresses:
 ```
 
 ### Join network
-During the initial phase of testing, the validator address from the previous step needs to be whitelisted. The validator set on testnet is entirely permissionless.
+The validator set on testnet is entirely permissionless.
 
-Register public IP and signer address of validator, along with display name and description. On testnet, self-delegate 10_000 HYPE to run the validator.
+Register public IP and signer address of validator, along with display name and description. On testnet, self-delegate 10_000 (1000000000000 wei) to run the validator.
+
 ```
 ~/hl-node --chain Testnet --key <validator-key> send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "signer": "<signer-address>", "name": "...", "description": "..." }, "initial_wei": 1000000000000}}'
 ```
