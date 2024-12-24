@@ -41,6 +41,7 @@ After=network.target
 [Service]
 Type=simple
 User=YOUR_USERNAME
+WorkingDirectory=/home/YOUR_USERNAME
 ExecStart=/home/YOUR_USERNAME/hl-visor run-non-validator
 Restart=always
 RestartSec=10
