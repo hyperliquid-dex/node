@@ -32,7 +32,7 @@ Create the system service config file:
 sudo nano /etc/systemd/system/hl-visor.service
 ```
 
-Add the required information to the config, replace both instances of YOUR_USERNAME:
+Add the required information to the config, replace ALL instances of YOUR_USERNAME:
 ```
 [Unit]
 Description=HL-Visor Non-Validator Service
