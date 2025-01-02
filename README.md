@@ -23,6 +23,48 @@ curl https://binaries.hyperliquid.xyz/Testnet/hl-visor > ~/hl-visor && chmod a+x
 ## Running non-validator
 Run `~/hl-visor run-non-validator`. It may take a while as the node navigates the network to find an appropriate peer to stream from. Logs like `applied block X` mean the node should be streaming live data.
 
+## Running as a System Service (optional)
+
+To have more control over the running service, it is considered good practice to run the program as a system service.
+
+Create the system service config file:
+```
+sudo nano /etc/systemd/system/hl-visor.service
+```
+
+Add the required information to the config, replace ALL instances of YOUR_USERNAME:
+```
+[Unit]
+Description=HL-Visor Non-Validator Service
+After=network.target
+
+[Service]
+Type=simple
+User=YOUR_USERNAME
+WorkingDirectory=/home/YOUR_USERNAME
+ExecStart=/home/YOUR_USERNAME/hl-visor run-non-validator
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
+
+```
+Enable the service:
+```
+sudo systemctl enable hl-visor.service
+```
+
+Start the service:
+```
+sudo systemctl start hl-visor
+```
+
+And finally to follow the logs use command:
+```
+journalctl -u hl-visor -f
+```
+
 ## Reading L1 data
 The node process will write data to `~/hl/data`. With default settings, the network will generate around 20 gb of logs per day, so it is also recommended to archive or delete old files.
 
