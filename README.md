@@ -20,6 +20,15 @@ Download the visor binary, which will spawn and manage the child node process:
 curl https://binaries.hyperliquid.xyz/Testnet/hl-visor > ~/hl-visor && chmod a+x ~/hl-visor
 ```
 
+## Verify signed binaries
+Binaries are signed for extra security. The public key is found at `pub_key.asc`. Verify any (signature, binary) pair manually:
+```
+gpg --import pub_key.asc
+gpg --verify hl-visor.asc hl-visor
+```
+
+`hl-visor` will also verify `hl-node` automatically and will not upgrade on verification failure.
+
 ## Running non-validator
 Run `~/hl-visor run-non-validator`. It may take a while as the node navigates the network to find an appropriate peer to stream from. Logs like `applied block X` mean the node should be streaming live data.
 
