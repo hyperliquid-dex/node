@@ -21,13 +21,21 @@ curl https://binaries.hyperliquid.xyz/Testnet/hl-visor > ~/hl-visor && chmod a+x
 ```
 
 ## Verify signed binaries
-Binaries are signed for extra security. The public key is found at `pub_key.asc`. Verify any (signature, binary) pair manually:
+Binaries are signed for extra security. The public key is found at `pub_key.asc` in this repo.
+Import this key:
+```
+gpg --import pub_key.asc
+```
+
+Verify any (signature, binary) pair manually:
 ```
 gpg --import pub_key.asc
 gpg --verify hl-visor.asc hl-visor
 ```
 
-`hl-visor` will also verify `hl-node` automatically and will not upgrade on verification failure.
+`hl-visor` will also verify `hl-node` automatically and will not upgrade on verification failure. Important: the public key must be imported as above or the visor will not work.
+
+Optionally, sign this key using `gpg --sign-key` to avoid warnings when verifying its signatures.
 
 ## Running non-validator
 Run `~/hl-visor run-non-validator`. It may take a while as the node navigates the network to find an appropriate peer to stream from. Logs like `applied block X` mean the node should be streaming live data.
@@ -41,7 +49,7 @@ Create the system service config file:
 sudo nano /etc/systemd/system/hl-visor.service
 ```
 
-Add the required information to the config, replace ALL instances of YOUR_USERNAME:
+Add the required information to the config, replace ALL instances of USERNAME:
 ```
 [Unit]
 Description=HL-Visor Non-Validator Service
@@ -49,9 +57,9 @@ After=network.target
 
 [Service]
 Type=simple
-User=YOUR_USERNAME
-WorkingDirectory=/home/YOUR_USERNAME
-ExecStart=/home/YOUR_USERNAME/hl-visor run-non-validator
+User=USERNAME
+WorkingDirectory=/home/USERNAME
+ExecStart=/home/USERNAME/hl-visor run-non-validator
 Restart=always
 RestartSec=10
 
