@@ -27,9 +27,9 @@ Import this key:
 gpg --import pub_key.asc
 ```
 
-Verify any (signature, binary) pair manually:
+Verify any (signature, binary) pair manually. Signatures for are located at `{binary}.asc`:
 ```
-gpg --import pub_key.asc
+curl https://binaries.hyperliquid-testnet.xyz/Testnet/hl-visor.asc > hl-visor.asc
 gpg --verify hl-visor.asc hl-visor
 ```
 
