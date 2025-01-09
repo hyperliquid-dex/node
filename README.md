@@ -17,7 +17,7 @@ echo '{"chain": "Testnet"}' > ~/visor.json
 
 Download the visor binary, which will spawn and manage the child node process:
 ```
-curl https://binaries.hyperliquid.xyz/Testnet/hl-visor > ~/hl-visor && chmod a+x ~/hl-visor
+curl https://binaries.hyperliquid-testnet.xyz/Testnet/hl-visor > ~/hl-visor && chmod a+x ~/hl-visor
 ```
 
 ## Verify signed binaries
@@ -171,7 +171,7 @@ Register public IP and signer address of validator, along with display name and 
 Make sure ports 4000-4010 are open to other validators (currently only ports 4001-4006 are used, but additional ports in the range 4000-4010 may be used in the future). Either open the ports to the public, or keep a firewall allowing the validators which are found in `c_staking` in the state snapshots. Note that the validator set and IPs are dynamic.
 
 ### Run the validator
-Run the validator using the visor binary to pick up updates `curl https://binaries.hyperliquid.xyz/Testnet/hl-visor > hl-visor && ./hl-visor run-validator`
+Run the validator using the visor binary to pick up updates `curl https://binaries.hyperliquid-testnet.xyz/Testnet/hl-visor > hl-visor && ./hl-visor run-validator`
 
 To debug an issue, it is often easier to run `./hl-node --chain Testnet run-validator` to immediately see stderr and disable restarts.
 
