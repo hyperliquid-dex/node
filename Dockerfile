@@ -5,11 +5,9 @@ ARG USER_UID=10000
 ARG USER_GID=$USER_UID
 
 # Define URLs as environment variables
-ARG INITIAL_PEERS_URL=https://binaries.hyperliquid.xyz/Testnet/initial_peers.json
 ARG PUB_KEY_URL=https://raw.githubusercontent.com/hyperliquid-dex/node/refs/heads/main/pub_key.asc
 ARG HL_VISOR_URL=https://binaries.hyperliquid-testnet.xyz/Testnet/hl-visor
 ARG HL_VISOR_ASC_URL=https://binaries.hyperliquid-testnet.xyz/Testnet/hl-visor.asc
-ARG USE_IMPERATOR_PEERS=false
 
 # Create user and install dependencies
 RUN groupadd --gid $USER_GID $USERNAME \
@@ -23,13 +21,6 @@ WORKDIR /home/$USERNAME
 
 # Configure chain to testnet
 RUN echo '{"chain": "Testnet"}' > /home/$USERNAME/visor.json
-
-# Conditionally download peer list
-RUN if [ "$USE_IMPERATOR_PEERS" = "true" ]; then \
-        curl -o /home/$USERNAME/override_gossip_config.json https://hyperliquid-testnet.imperator.co/peers.json; \
-    else \
-        curl -o /home/$USERNAME/initial_peers.json $INITIAL_PEERS_URL; \
-    fi
 
 # Import GPG public key
 RUN curl -o /home/$USERNAME/pub_key.asc $PUB_KEY_URL \
