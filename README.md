@@ -1,7 +1,7 @@
 # Running a node
 
 ## Machine Specs
-Recommended hardware: 4 CPU cores, 16 gb RAM, 50 gb disk.
+Recommended minimum hardware: 4 CPU cores, 32 gb RAM, 200 gb disk.
 
 Currently only Ubuntu 24.04 is supported.
 
@@ -39,48 +39,6 @@ Optionally, sign this key using `gpg --sign-key` to avoid warnings when verifyin
 
 ## Running non-validator
 Run `~/hl-visor run-non-validator`. It may take a while as the node navigates the network to find an appropriate peer to stream from. Logs like `applied block X` mean the node should be streaming live data.
-
-## Running as a System Service (optional)
-
-To have more control over the running service, it is considered good practice to run the program as a system service.
-
-Create the system service config file:
-```
-sudo nano /etc/systemd/system/hl-visor.service
-```
-
-Add the required information to the config, replace ALL instances of USERNAME:
-```
-[Unit]
-Description=HL-Visor Non-Validator Service
-After=network.target
-
-[Service]
-Type=simple
-User=USERNAME
-WorkingDirectory=/home/USERNAME
-ExecStart=/home/USERNAME/hl-visor run-non-validator
-Restart=always
-RestartSec=10
-
-[Install]
-WantedBy=multi-user.target
-
-```
-Enable the service:
-```
-sudo systemctl enable hl-visor.service
-```
-
-Start the service:
-```
-sudo systemctl start hl-visor
-```
-
-And finally to follow the logs use command:
-```
-journalctl -u hl-visor -f
-```
 
 ## Reading L1 data
 The node process will write data to `~/hl/data`. With default settings, the network will generate around 20 gb of logs per day, so it is also recommended to archive or delete old files.
@@ -213,7 +171,14 @@ Test the Slack alert configuration:
 
 Alternative alerting systems can be configured by filtering to the lines in stdout at level `CRIT`.
 
-## Misc
+## Logs
+`node_logs/consensus` will contain most messages sent and received by the consensus algorithm, and is often helpful for debugging.
+
+For example, to check whether Vote messages were sent to validator `0x5ac9...` around `2024-12-10T09:25`, run `grep destination...0x5ac9  ~/hl/data/node_logs/consensus/hourly/20241210/9  | grep T09:25 | grep Vote`.
+
+Validators with issues will timeout on rounds when they do not propose a block. Search for `suspect` in the consensus logs to see the timeouts and their likely cause. Often jailing will be correlated with many timeouts by the jailed node.
+
+## Validator endpoints
 See information about the current validators:
 ```
 curl -X POST --header "Content-Type: application/json" --data '{ "type": "validatorSummaries"}' https://api.hyperliquid-testnet.xyz/info
@@ -228,19 +193,6 @@ Other validator profile options:
 - `disable_delegations`: Disables delegations when this is set to true.
 - `commission_bps`: Amount of the staking rewards the validator takes before the remainder is distributed proportionally to stake delegated. Defaults to 10000 (all rewards go to the validator) and is not allowed to increase.
 - `signer`: Allows the validator to set a hot address for signing consensus messages.
-
-### Running with Docker
-To build the node, run:
-
-```bash
-docker compose build
-```
-
-To run the node, run:
-
-```bash
-docker compose up -d
-```
 
 ### Troubleshooting
 Crash logs from the child process will be written to `~/hl/data/visor_child_stderr/{date}/{node_binary_index}`
