@@ -4,30 +4,36 @@ ARG USERNAME=hluser
 ARG USER_UID=10000
 ARG USER_GID=$USER_UID
 
-# create custom user, install dependencies, create data directory
+# Define URLs as environment variables
+ARG PUB_KEY_URL=https://raw.githubusercontent.com/hyperliquid-dex/node/refs/heads/main/pub_key.asc
+ARG HL_VISOR_URL=https://binaries.hyperliquid-testnet.xyz/Testnet/hl-visor
+ARG HL_VISOR_ASC_URL=https://binaries.hyperliquid-testnet.xyz/Testnet/hl-visor.asc
+
+# Create user and install dependencies
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && apt-get update -y && apt-get install curl -y \
+    && apt-get update -y && apt-get install -y curl gnupg \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /home/$USERNAME/hl/data && chown -R $USERNAME:$USERNAME /home/$USERNAME/hl
 
 USER $USERNAME
-
 WORKDIR /home/$USERNAME
 
-# configure chain to testnet
+# Configure chain to testnet
 RUN echo '{"chain": "Testnet"}' > /home/$USERNAME/visor.json
 
-# save the public list of peers to connect to
-ADD --chown=$USER_UID:$USER_GID https://binaries.hyperliquid.xyz/Testnet/initial_peers.json /home/$USERNAME/initial_peers.json
+# Import GPG public key
+RUN curl -o /home/$USERNAME/pub_key.asc $PUB_KEY_URL \
+    && gpg --import /home/$USERNAME/pub_key.asc
 
-# temporary configuration file (will not be required in future update)
-ADD --chown=$USER_UID:$USER_GID https://binaries.hyperliquid.xyz/Testnet/non_validator_config.json /home/$USERNAME/non_validator_config.json
+# Download and verify hl-visor binary
+RUN curl -o /home/$USERNAME/hl-visor $HL_VISOR_URL \
+    && curl -o /home/$USERNAME/hl-visor.asc $HL_VISOR_ASC_URL \
+    && gpg --verify /home/$USERNAME/hl-visor.asc /home/$USERNAME/hl-visor \
+    && chmod +x /home/$USERNAME/hl-visor
 
-# add the binary
-ADD --chown=$USER_UID:$USER_GID --chmod=700 https://binaries.hyperliquid.xyz/Testnet/hl-visor /home/$USERNAME/hl-visor
-
-# gossip ports
+# Expose gossip ports
 EXPOSE 4000-4010
 
-# run a non-validating node
-ENTRYPOINT $HOME/hl-visor run-non-validator
+# Run a non-validating node
+ENTRYPOINT ["/home/hluser/hl-visor", "run-non-validator", "--replica-cmds-style", "recent-actions"]
