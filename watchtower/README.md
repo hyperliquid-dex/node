@@ -1,7 +1,3 @@
-Here's a simple README for your script:
-
----
-
 # Validator Monitoring Script
 
 This script monitors a specified validator on the Hyperliquid network (testnet or mainnet) and sends alerts to a Telegram channel if the validator is not active or is jailed.
