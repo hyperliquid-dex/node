@@ -202,8 +202,6 @@ ASXN,20.188.6.225
 ASXN,74.226.182.22
 B-Harvest,57.182.103.24
 B-Harvest,3.115.170.40
-LiquidSpirit x Rekt Gang,199.254.199.190
-LiquidSpirit x Rekt Gang,72.46.87.191
 Nansen,46.105.222.166
 Nansen,91.134.41.52
 ```
