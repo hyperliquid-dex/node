@@ -10,7 +10,7 @@ Ports 4001 and 4002 are used for gossip and must be open to the public. Otherwis
 For lowest latency, run the node in Tokyo, Japan.
 
 ## Setup
-Configure chain to testnet. Mainnet will be available once testing is complete on testnet:
+Configure chain to testnet when testing.
 ```
 echo '{"chain": "Testnet"}' > ~/visor.json
 ```
@@ -193,6 +193,20 @@ Other validator profile options:
 - `disable_delegations`: Disables delegations when this is set to true.
 - `commission_bps`: Amount of the staking rewards the validator takes before the remainder is distributed proportionally to stake delegated. Defaults to 10000 (all rewards go to the validator) and is not allowed to increase.
 - `signer`: Allows the validator to set a hot address for signing consensus messages.
+
+## Mainnet non-validator seed peers
+The community runs several independent root peers for non-validators to connect to. This set will grow over time, and validators may share their own reliable root peers in other channels. To run a non-validator on mainnet, add at least one of these IP addresses to `~/override_gossip_config.json`:
+```
+operator_name,root_ips
+ASXN,20.188.6.225
+ASXN,74.226.182.22
+B-Harvest,57.182.103.24
+B-Harvest,3.115.170.40
+LiquidSpirit x Rekt Gang,199.254.199.190
+LiquidSpirit x Rekt Gang,72.46.87.191
+Nansen,46.105.222.166
+Nansen,91.134.41.52
+```
 
 ### Troubleshooting
 Crash logs from the child process will be written to `~/hl/data/visor_child_stderr/{date}/{node_binary_index}`
