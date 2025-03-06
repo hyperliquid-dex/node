@@ -204,6 +204,7 @@ B-Harvest,57.182.103.24
 B-Harvest,3.115.170.40
 Nansen,46.105.222.166
 Nansen,91.134.41.52
+Hypurrscan,57.180.50.253
 ```
 
 ### Troubleshooting
