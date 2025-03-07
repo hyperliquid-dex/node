@@ -34,7 +34,7 @@ The visor binary spawns and manages the child node process.
   ```
 - **Mainnet**:
   ```bash
-  curl https://binaries.hyperliquid-mainnet.xyz/Mainnet/hl-visor > ~/hl-visor && chmod a+x ~/hl-visor
+  curl https://binaries.hyperliquid.xyz/Mainnet/hl-visor > ~/hl-visor && chmod a+x ~/hl-visor
   ```
 
 ---
@@ -58,7 +58,7 @@ Binaries are signed for extra security. The public key is found at `pub_key.asc`
      ```
    - **Mainnet**:
      ```bash
-     curl https://binaries.hyperliquid-mainnet.xyz/Mainnet/hl-visor.asc > hl-visor.asc
+     curl https://binaries.hyperliquid.xyz/Mainnet/hl-visor.asc > hl-visor.asc
      gpg --verify hl-visor.asc hl-visor
      ```
 
@@ -261,7 +261,7 @@ Make sure ports 4000-4010 are open to other validators. (Currently, only ports 4
   ```
 - **Mainnet:**
   ```bash
-  curl https://binaries.hyperliquid-mainnet.xyz/Mainnet/hl-visor > hl-visor && ./hl-visor run-validator
+  curl https://binaries.hyperliquid.xyz/Mainnet/hl-visor > hl-visor && ./hl-visor run-validator
   ```
 
 > **Debugging Tip:** To see stderr immediately and disable restarts, run:
