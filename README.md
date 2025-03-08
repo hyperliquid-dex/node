@@ -209,8 +209,8 @@ Infinite Field,52.68.71.160
 Infinite Field,13.114.116.44
 LiquidSpirit x Rekt Gang,199.254.199.190
 LiquidSpirit x Rekt Gang,72.46.87.191
-Imperator.co (JP),45.32.32.21
-Imperator.co (EU).157.90.207.92
+Imperator.co,45.32.32.21
+Imperator.co,157.90.207.92
 ```
 
 ### Troubleshooting
