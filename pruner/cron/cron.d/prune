@@ -1,2 +1,1 @@
-0 3 * * * hluser /bin/bash /home/hluser/scripts/prune.sh >> /proc/1/fd/1 2>&1
-
+0 3 * * * /bin/bash -c '/home/hluser/scripts/prune.sh > /proc/1/fd/1 2>&1'
