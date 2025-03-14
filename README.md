@@ -84,13 +84,13 @@ It may take a while as the node navigates the network to find an appropriate pee
 
 The node writes data to `~/hl/data`. With default settings, the network will generate around 20 GB of logs per day, so it is recommended to archive or delete old files.
 
-- **Transaction Blocks:**  
+- **Transaction Blocks:**
   Blocks parsed as transactions are streamed to:
   ```
   ~/hl/data/replica_cmds/{start_time}/{date}/{height}
   ```
 
-- **State Snapshots:**  
+- **State Snapshots:**
   State snapshots are saved every 10,000 blocks to:
   ```
   ~/hl/data/periodic_abci_states/{date}/{height}.rmp
@@ -115,7 +115,7 @@ When running validators or non-validators, you can use the following flags:
 
 - `--write-trades`: Streams trades to `~/hl/data/node_trades/hourly/{date}/{hour}`.
 - `--write-order-statuses`: Writes every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. (Note that orders can be a substantial amount of data.)
-- `--replica-cmds-style`: Configures what is written to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`.  
+- `--replica-cmds-style`: Configures what is written to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`.
   Options:
   - `actions` (default) – only actions
   - `actions-and-responses` – both actions and responses
@@ -156,7 +156,7 @@ The native token on Testnet is **HYPE** with token address:
 
 **Delegation Process (applies to both chains):**
 
-1. **Staking Deposit:**  
+1. **Staking Deposit:**
    Transfer tokens from your spot balance into the staking balance:
    - **Testnet:**
      ```bash
@@ -167,7 +167,7 @@ The native token on Testnet is **HYPE** with token address:
      ./hl-node --chain Mainnet --key <delegator-wallet-key> staking-deposit <wei>
      ```
 
-2. **Delegate Tokens:**  
+2. **Delegate Tokens:**
    Delegate tokens to a validator:
    - **Testnet:**
      ```bash
@@ -180,15 +180,15 @@ The native token on Testnet is **HYPE** with token address:
 
    Optionally, add `--undelegate` to undelegate from the validator.
 
-3. **View Delegations:**  
+3. **View Delegations:**
    - **Testnet:**
      ```bash
      curl -X POST --header "Content-Type: application/json" --data '{ "type": "delegations", "user": <delegator-address>}' https://api.hyperliquid-testnet.xyz/info
      ```
-   - **Mainnet:**  
+   - **Mainnet:**
      Use the corresponding API endpoint for mainnet (if available).
 
-4. **Staking Withdrawal:**  
+4. **Staking Withdrawal:**
    Initiate a staking withdrawal (subject to a 5-minute unbonding period):
    - **Testnet:**
      ```bash
@@ -399,7 +399,7 @@ Hypurrscan,57.180.50.253
 Infinite Field,52.68.71.160
 Infinite Field,13.114.116.44
 LiquidSpirit x Rekt Gang,199.254.199.190
-LiquidSpirit x Rekt Gang,72.46.87.191
+LiquidSpirit x Rekt Gang,199.254.199.247
 Imperator.co,45.32.32.21
 Imperator.co,157.90.207.92
 ```
