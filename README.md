@@ -396,6 +396,7 @@ B-Harvest,3.115.170.40
 Nansen x HypurrCollective,46.105.222.166
 Nansen x HypurrCollective,91.134.41.52
 Hypurrscan,57.180.50.253
+Hypurrscan,54.248.41.39
 Infinite Field,52.68.71.160
 Infinite Field,13.114.116.44
 LiquidSpirit x Rekt Gang,199.254.199.190
