@@ -402,6 +402,8 @@ LiquidSpirit x Rekt Gang,199.254.199.190
 LiquidSpirit x Rekt Gang,199.254.199.247
 Imperator.co,45.32.32.21
 Imperator.co,157.90.207.92
+ValiDAO,160.202.131.51
+ValiDAO,72.46.87.141
 ```
 
 ---
