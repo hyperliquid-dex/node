@@ -389,6 +389,8 @@ Other validator profile options include:
 The community runs several independent root peers for non-validators to connect to on Mainnet. To run a non-validator on Mainnet, add at least one of these IP addresses to your `~/override_gossip_config.json`:
 ```
 operator_name,root_ips
+NodeOps,35.213.122.164 
+NodeOps,35.213.89.139 
 ASXN,20.188.6.225
 ASXN,74.226.182.22
 B-Harvest,57.182.103.24
