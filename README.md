@@ -414,7 +414,6 @@ HyperStake,57.129.140.247
 ValiDAO,160.202.131.51
 ValiDAO,72.46.87.141
 HypurrCorea: SKYGG x DeSpread,47.74.39.46
-HypurrCorea: SKYGG x DeSpread,47.91.2.87
 ```
 
 ---
