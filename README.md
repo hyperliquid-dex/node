@@ -413,6 +413,8 @@ HyperStake,91.134.71.237
 HyperStake,57.129.140.247
 ValiDAO,160.202.131.51
 ValiDAO,72.46.87.141
+Hyperbeat x P2P.org x Hypio,199.254.199.12
+Hyperbeat x P2P.org x Hypio,199.254.199.54
 ```
 
 ---
