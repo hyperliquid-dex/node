@@ -116,11 +116,11 @@ When running validators or non-validators, you can use the following flags:
 - `--write-trades`: Streams trades to `~/hl/data/node_trades/hourly/{date}/{hour}`.
 - `--write-order-statuses`: Writes every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. (Note that orders can be a substantial amount of data.)
 - `--replica-cmds-style`: Configures what is written to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`.
-- `--disable-output-file-buffering`: Flush each line immediately when writing output files. This reduces latency but leads to more disk IO operations.
   Options:
   - `actions` (default) – only actions
   - `actions-and-responses` – both actions and responses
   - `recent-actions` – only preserves the two latest height files
+- `--disable-output-file-buffering`: Flush each line immediately when writing output files. This reduces latency but leads to more disk IO operations.
 - `--serve-eth-rpc`: Enables the EVM RPC (see next section).
 
 For example, to run a non-validator with all flags enabled:
