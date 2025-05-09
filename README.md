@@ -82,7 +82,9 @@ It may take a while as the node navigates the network to find an appropriate pee
 
 ## Reading L1 Data
 
-The node writes data to `~/hl/data`. With default settings, the network will generate around 20 GB of logs per day, so it is recommended to archive or delete old files.
+The node writes data to `~/hl/data`. With default settings, the network will generate around 100 GB of logs per day, so it is recommended to archive or delete old files.
+
+For more information about examples and all the data types that can be written, refer to [docs](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/nodes/reading-l1-data).
 
 - **Transaction Blocks:**
   Blocks parsed as transactions are streamed to:
