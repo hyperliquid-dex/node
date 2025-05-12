@@ -11,9 +11,17 @@ services:
   node:
     networks:
       - hyperevm-mainnet
+    stop_grace_period: 5m
+    deploy:
+      resources:
+        limits:
+          cpus: '12'
+          memory: '24G'
     restart: unless-stopped
     build: .
     entrypoint: "/home/hluser/hl-visor"
+    environment:
+      - RUST_BACKTRACE=full
     command:
       - run-non-validator
       - --replica-cmds-style
