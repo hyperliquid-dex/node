@@ -1,21 +1,33 @@
 name: "hyperliquid"
 
+networks:
+  hyperevm-mainnet:
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.17.81.0/24
+
 services:
   node:
+    networks:
+      - hyperevm-mainnet
     restart: unless-stopped
     build: .
+    entrypoint: "/home/hluser/hl-visor"
+    command:
+      - run-non-validator
+      - --replica-cmds-style
+      - recent-actions
+      - --serve-eth-rpc
     ports:
-      - "4000-4010:4000-4010"
+      - 4001:4001
+      - 4002:4002
+      - 8695:3001
     volumes:
-      - hl-data:/home/hluser/hl/data
+      - /data/hyperliquid:/home/hluser/hl/data
 
-  pruner:
-    restart: unless-stopped
-    build: ./pruner
-    volumes:
-      - hl-data:/home/hluser/hl/data
-
-
-volumes:
-  hl-data:
-    driver: local
+  # pruner:
+  #   restart: unless-stopped
+  #   build: ./pruner
+  #   volumes:
+  #     - /data/hyperliquid:/home/hluser/hl/data
