@@ -24,7 +24,7 @@ services:
       - 4002:4002
       - 8695:3001
     volumes:
-      - /data/hyperliquid:/home/hluser/hl/data
+      - /data/hyper:/home/hluser/hl/data
 
   # pruner:
   #   restart: unless-stopped
