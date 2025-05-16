@@ -413,7 +413,7 @@ HyperStake,91.134.71.237
 HyperStake,57.129.140.247
 ValiDAO,160.202.131.51
 ValiDAO,72.46.87.141
-Luganodes,72.46.86.89
+Luganodes,45.250.255.111
 Luganodes,109.94.99.131
 ```
 
