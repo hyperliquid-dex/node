@@ -123,6 +123,7 @@ When running validators or non-validators, you can use the following flags:
   - `actions` (default) – only actions
   - `actions-and-responses` – both actions and responses
   - `recent-actions` – only preserves the two latest height files
+- `--compute-l4-snapshots <abci-state-fln> <out-fln>`: Outputs the order book with all order information from `<abci-state-fln>` and outputs it to `<out-fln>`
 - `--disable-output-file-buffering`: Flush each line immediately when writing output files. This reduces latency but leads to more disk IO operations.
 - `--serve-eth-rpc`: Enables the EVM RPC (see next section).
 
