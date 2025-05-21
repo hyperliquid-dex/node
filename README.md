@@ -113,7 +113,7 @@ For more information about examples and all the data types that can be written, 
 
 ## Flags
 
-When running validators or non-validators, you can use the following flags:
+When running validators or non-validators, you can use the following flags. The data schemas for the output data are documented [here](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/nodes/l1-data-schemas).
 
 - `--write-trades`: Streams trades to `~/hl/data/node_trades/hourly/{date}/{hour}`.
 - `--write-order-statuses`: Writes every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. (Note that orders can be a substantial amount of data.)
