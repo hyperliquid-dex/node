@@ -82,7 +82,9 @@ It may take a while as the node navigates the network to find an appropriate pee
 
 ## Reading L1 Data
 
-The node writes data to `~/hl/data`. With default settings, the network will generate around 20 GB of logs per day, so it is recommended to archive or delete old files.
+The node writes data to `~/hl/data`. With default settings, the network will generate around 100 GB of logs per day, so it is recommended to archive or delete old files.
+
+For more information about examples and all the data types that can be written, refer to [docs](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/nodes/reading-l1-data).
 
 - **Transaction Blocks:**
   Blocks parsed as transactions are streamed to:
@@ -115,11 +117,14 @@ When running validators or non-validators, you can use the following flags:
 
 - `--write-trades`: Streams trades to `~/hl/data/node_trades/hourly/{date}/{hour}`.
 - `--write-order-statuses`: Writes every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. (Note that orders can be a substantial amount of data.)
+- `--write-misc-events`: Writes miscellaneous event data to `~/hl/data/misc_events/hourly/{date}/{hour}`. See [docs](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/nodes/reading-l1-data#miscellaneous-events) for more details.
 - `--replica-cmds-style`: Configures what is written to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`.
   Options:
   - `actions` (default) – only actions
   - `actions-and-responses` – both actions and responses
   - `recent-actions` – only preserves the two latest height files
+- `--compute-l4-snapshots <abci-state-fln> <out-fln>`: Outputs the order book with all order information from `<abci-state-fln>` and outputs it to `<out-fln>`
+- `--disable-output-file-buffering`: Flush each line immediately when writing output files. This reduces latency but leads to more disk IO operations.
 - `--serve-eth-rpc`: Enables the EVM RPC (see next section).
 
 For example, to run a non-validator with all flags enabled:
@@ -415,6 +420,10 @@ ValiDAO,160.202.131.51
 ValiDAO,72.46.87.141
 Hyperbeat x P2P.org x Hypio,199.254.199.12
 Hyperbeat x P2P.org x Hypio,199.254.199.54
+Luganodes,45.250.255.111
+Luganodes,109.94.99.131
+HypurrCorea: SKYGG x DeSpread,47.74.39.46
+HypurrCorea: SKYGG x DeSpread,8.211.133.129
 ```
 
 ---
