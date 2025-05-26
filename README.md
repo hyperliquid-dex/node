@@ -398,8 +398,8 @@ NodeOps,35.213.122.164
 NodeOps,35.213.89.139
 ASXN,20.188.6.225
 ASXN,74.226.182.22
-B-Harvest,57.182.103.24
-B-Harvest,3.115.170.40
+B-Harvest,180.189.55.18
+B-Harvest,180.189.55.19
 Nansen x HypurrCollective,46.105.222.166
 Nansen x HypurrCollective,91.134.41.52
 Hypurrscan,57.180.50.253
