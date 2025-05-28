@@ -22,7 +22,7 @@ WORKDIR /home/$USERNAME
 # Configure chain to testnet
 RUN echo '{"chain": "Mainnet"}' > /home/$USERNAME/visor.json
 #RUN echo "operator_name,root_ips\nASXN,20.188.6.225\nASXN,74.226.182.22\nB-Harvest,57.182.103.24\nB-Harvest,3.115.170.40\nNansen,46.105.222.166\nNansen,91.134.41.52" > /home/$USERNAME/override_gossip_config.json
-RUN echo '{ "root_node_ips": [{"Ip": "20.188.6.225"}, {"Ip": "74.226.182.22"}, {"Ip": "57.182.103.24"}, {"Ip": "3.115.170.40"}, {"Ip": "46.105.222.166"}, {"Ip": "91.134.41.52"}], "try_new_peers": true, "chain": "Mainnet" }' > ~/override_gossip_config.json
+RUN echo '{ "root_node_ips": [{"Ip": "20.188.6.225"}, {"Ip": "74.226.182.22"}, {"Ip": "180.189.55.18"}, {"Ip": "180.189.55.19"}, {"Ip": "46.105.222.166"}, {"Ip": "91.134.41.52"}, {"Ip": "91.134.71.237"}, {"Ip": "45.250.255.111"}], "try_new_peers": true, "chain": "Mainnet" }' > ~/override_gossip_config.json
 
 # Import GPG public key
 RUN curl -o /home/$USERNAME/pub_key.asc $PUB_KEY_URL \
