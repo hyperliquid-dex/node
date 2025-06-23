@@ -109,6 +109,11 @@ For more information about examples and all the data types that can be written, 
     ./hl-node --chain Mainnet translate-abci-state ~/hl/data/periodic_abci_states/{date}/{height}.rmp /tmp/out.json
     ```
 
+  To compute L4 book snapshots (full onchain order information) from a state snapshot file:
+    ```bash
+    ./hl-node --chain <chain> compute-l4-snapshots <abci-state-path> <out-path>
+    ```
+
 ---
 
 ## Flags
@@ -124,7 +129,6 @@ When running validators or non-validators, you can use the following flags. The 
   - `actions` (default) – only actions
   - `actions-and-responses` – both actions and responses
   - `recent-actions` – only preserves the two latest height files
-- `--compute-l4-snapshots <abci-state-fln> <out-fln>`: Outputs the order book with all order information from `<abci-state-fln>` and outputs it to `<out-fln>`
 - `--disable-output-file-buffering`: Flush each line immediately when writing output files. This reduces latency but leads to more disk IO operations.
 - `--serve-eth-rpc`: Enables the EVM RPC (see next section).
 
@@ -395,7 +399,6 @@ Other validator profile options include:
 The community runs several independent root peers for non-validators to connect to on Mainnet. To run a non-validator on Mainnet, add at least one of these IP addresses to your `~/override_gossip_config.json`:
 ```
 operator_name,root_ips
-NodeOps,15.235.4.192
 NodeOps,148.113.176.170
 ASXN,20.188.6.225
 ASXN,74.226.182.22
