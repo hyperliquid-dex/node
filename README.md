@@ -122,7 +122,7 @@ When running validators or non-validators, you can use the following flags. The 
 
 - `--write-trades`: Streams trades to `~/hl/data/node_trades/hourly/{date}/{hour}`.
 - `--write-fills`: Streams fills in the API fills format to `~/hl/data/node_fills/hourly/{date}/{hour}`. This overrides `--write-trades` if both are set.
-- `--write-order-statuses`: Writes every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. (Note that orders can be a substantial amount of data.)
+- `--write-order-statuses`: Writes every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. Note that orders can be a substantial amount of data.
 - `--write-misc-events`: Writes miscellaneous event data to `~/hl/data/misc_events/hourly/{date}/{hour}`. See [docs](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/nodes/reading-l1-data#miscellaneous-events) for more details.
 - `--replica-cmds-style`: Configures what is written to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`.
   Options:
@@ -131,6 +131,7 @@ When running validators or non-validators, you can use the following flags. The 
   - `recent-actions` – only preserves the two latest height files
 - `--disable-output-file-buffering`: Flush each line immediately when writing output files. This reduces latency but leads to more disk IO operations.
 - `--serve-eth-rpc`: Enables the EVM RPC (see next section).
+- `--serve-info`: Enables local HTTP server to handle info requests (see next section).
 
 For example, to run a non-validator with all flags enabled:
 ```bash
@@ -141,9 +142,9 @@ For example, to run a non-validator with all flags enabled:
 
 ---
 
-## EVM
+## EVM and Info servers
 
-Enable the EVM RPC by adding the `--serve-eth-rpc` flag:
+Enable the EVM JSON-RPC by adding the `--serve-eth-rpc` flag:
 ```bash
 ~/hl-visor run-non-validator --serve-eth-rpc
 ```
@@ -152,6 +153,45 @@ Once running, you can send RPC requests. For example, to retrieve the latest blo
 ```bash
 curl -X POST --header 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false],"id":1}' http://localhost:3001/evm
 ```
+
+Similarly, `--serve-info` enables a local server at `http://localhost:3001/info` to handle info requests with the API request/response format.
+See [docs](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/info-endpoint) for more details.
+Running a local info server can help with rate limits and reduces trust assumptions on external operators.
+Currently the local server only supports a subset of requests that are entirely a function of local state. In particular, historical time series queries and websockets are not currently supported. The `--write-*` flags on the node can be used for historical and streaming purposes.
+
+The currently supported info requests on the local server are
+```
+    meta
+    spotMeta
+    clearinghouseState
+    spotClearinghouseState
+    openOrders
+    exchangeStatus
+    frontendOpenOrders
+    liquidatable
+    activeAssetData
+    maxMarketOrderNtls
+    vaultSummaries
+    userVaultEquities
+    leadingVaults
+    extraAgents
+    subAccounts
+    userFees
+    userRateLimit
+    spotDeployState
+    perpDeployAuctionStatus
+    delegations
+    delegatorSummary
+    maxBuilderFee
+    userToMultiSigSigners
+    userRole
+    perpsAtOpenInterestCap
+    validatorL1Votes
+    marginTable
+    perpDexs
+```
+
+Some info requests such as `l2Book` are not currently supported, as they are only indexed by a small number of assets and can be easily polled or subscribed to within the standard rate limits.
 
 > **This applies for both Testnet and Mainnet.**
 
