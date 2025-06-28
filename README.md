@@ -325,14 +325,14 @@ Make sure ports 4000-4010 are open to other validators. (Currently, only ports 4
 >   ./hl-node --chain Mainnet run-validator
 >   ```
 
-For faster bootstrapping, use a known reliable peer:
+For faster bootstrapping, use a known reliable peer. `reserved_peer_ips` can be set by the peer to always allow incoming connections from specific IPs.
 - **Testnet:**
   ```bash
-  echo '{ "root_node_ips": [{"Ip": "1.2.3.4"}], "try_new_peers": false, "chain": "Testnet" }' > ~/override_gossip_config.json
+  echo '{ "root_node_ips": [{"Ip": "1.2.3.4"}], "try_new_peers": false, "chain": "Testnet", "reserved_peer_ips": [] }' > ~/override_gossip_config.json
   ```
 - **Mainnet:**
   ```bash
-  echo '{ "root_node_ips": [{"Ip": "1.2.3.4"}], "try_new_peers": false, "chain": "Mainnet" }' > ~/override_gossip_config.json
+  echo '{ "root_node_ips": [{"Ip": "1.2.3.4"}], "try_new_peers": false, "chain": "Mainnet", "reserved_peer_ips": ["5.6.7.8"] }' > ~/override_gossip_config.json
   ```
 
 ### Begin Validating
