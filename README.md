@@ -441,6 +441,7 @@ The community runs several independent root peers for non-validators to connect 
 ```
 operator_name,root_ips
 NodeOps,148.113.176.170
+NodeOps,116.202.117.124
 ASXN,20.188.6.225
 ASXN,74.226.182.22
 B-Harvest,180.189.55.18
