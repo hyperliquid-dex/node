@@ -190,6 +190,7 @@ The currently supported info requests on the local server are
     validatorL1Votes
     marginTable
     perpDexs
+    webData2 (does not compute assetCtxs, which do not depend on the user)
 ```
 
 Some info requests such as `l2Book` are not currently supported, as they are only indexed by a small number of assets and can be easily polled or subscribed to within the standard rate limits.
