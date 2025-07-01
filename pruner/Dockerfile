@@ -4,6 +4,11 @@ ARG USERNAME=hluser
 ARG USER_UID=10000
 ARG USER_GID=$USER_UID
 
+# Environment variables for pruner configuration (can be overridden at runtime)
+ENV DATA_PATH=/home/hluser/hl/data
+ENV PRUNE_DAYS=2
+ENV PRUNE_EXCLUDES=visor_child_stderr
+
 # create custom user, install dependencies, create data directory
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
