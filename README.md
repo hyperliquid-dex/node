@@ -468,8 +468,8 @@ Hyperbeat x P2P.org x Hypio,199.254.199.12
 Hyperbeat x P2P.org x Hypio,199.254.199.54
 Luganodes,45.250.255.111
 Luganodes,109.94.99.131
-HypurrCorea: SKYGG x DeSpread,47.74.39.46
-HypurrCorea: SKYGG x DeSpread,8.211.133.129
+HypurrCorea: SKYGG x DeSpread,8.220.222.129
+HypurrCorea: SKYGG x DeSpread,8.220.213.65
 ```
 
 ---
