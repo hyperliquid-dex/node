@@ -447,7 +447,7 @@ B-Harvest,180.189.55.18
 B-Harvest,180.189.55.19
 Nansen x HypurrCollective,46.105.222.166
 Nansen x HypurrCollective,91.134.41.52
-Hypurrscan,57.180.50.253
+Hypurrscan,13.230.78.76
 Hypurrscan,54.248.41.39
 Infinite Field,52.68.71.160
 Infinite Field,13.114.116.44
