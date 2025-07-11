@@ -388,6 +388,12 @@ It is recommended that validators set up an alerting system to maintain optimal 
 
 For **Mainnet**, use a similar configuration (with keys/channels specific to Mainnet if needed).
 
+### Sentry nodes
+
+Validators should dedicate most of their machine's resources to run consensus instead of serving many non-validators or running expensive local servers.
+A validator may connect up to two non-validator peers by specifying their IPs as `"sentry_ips": ["1.2.3.4", "5.6.7.8"]` in ~/hl/hyperliquid_data/node_config.json.
+Sentry nodes should be run by the validator themselves, and can be used as public root peers, API servers, EVM RPCs, etc.
+
 ---
 
 ## Logs
