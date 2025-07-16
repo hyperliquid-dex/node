@@ -196,6 +196,8 @@ The currently supported info requests on the local server are
 
 Some info requests such as `l2Book` are not currently supported, as they are only indexed by a small number of assets and can be easily polled or subscribed to within the standard rate limits.
 
+To ensure that the server information is up to date, `exchangeStatus` can be pinged periodically to compare L1 and local timestamps. The server information can be ignored when the L1 timestamp returned is sufficiently stale.
+
 > **This applies for both Testnet and Mainnet.**
 
 ---
