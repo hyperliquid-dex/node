@@ -55,5 +55,4 @@ docker compose up -d
 ```
 
 ## Additional Configuration
-The default number of gossip peers for non-validating nodes is 8. To configure a different number between 8 and 100 inclusive, put that integer in `~/hl/file_mod_time_tracker/n_gossip_peers`. This does not require restarting the node to take effect.
-
+The default number of gossip peers for non-validating nodes is 8. To configure a different number between 8 and 100 inclusive, put that integer as `n_gossip_peers` in `override_gossip_config.json`. This does not require restarting the node to take effect.
