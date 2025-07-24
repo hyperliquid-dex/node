@@ -14,6 +14,11 @@ services:
     build: ./pruner
     volumes:
       - hl-data:/home/hluser/hl/data
+    # Optional environment variables to customize pruning behavior
+    # environment:
+    #   - DATA_PATH=/home/hluser/hl/data              # Path to data directory (default: /home/hluser/hl/data)
+    #   - PRUNE_DAYS=2                                # Number of days to keep files (default: 2)
+    #   - PRUNE_EXCLUDES=visor_child_stderr,logs      # Comma-separated list of files/folders to exclude (default: visor_child_stderr)
 
 
 volumes:
