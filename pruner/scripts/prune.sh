@@ -21,15 +21,15 @@ size_before=$(du -sh "$DATA_PATH" | cut -f1)
 files_before=$(find "$DATA_PATH" -type f | wc -l)
 echo "$(date): Size before pruning: $size_before with $files_before files" >> /proc/1/fd/1
 
-# Build the exclusion part of the find command
-EXCLUDE_EXPR=""
-for name in "${EXCLUDES[@]}"; do
-    EXCLUDE_EXPR+=" ! -name \"$name\""
+# Build the -prune arguments for excluding directories
+PRUNE_ARGS=()
+for dir in "${EXCLUDES[@]}"; do
+    PRUNE_ARGS+=(-path "*/$dir" -prune -o)
 done
 
 # Delete data older than 48 hours = 60 minutes * 48 hours
 HOURS=$((60*48))
-eval "find \"$DATA_PATH\" -mindepth 1 -depth -mmin +$HOURS -type f $EXCLUDE_EXPR -delete"
+find "$DATA_PATH" -mindepth 1 "${PRUNE_ARGS[@]}" -type f -mmin +$HOURS -exec rm {} +
 
 # Get directory size after pruning
 size_after=$(du -sh "$DATA_PATH" | cut -f1)
