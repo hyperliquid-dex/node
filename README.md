@@ -1,7 +1,10 @@
 # Running a node
 
 ## Machine Specs
-Recommended minimum hardware: 4 CPU cores, 32 GB RAM, 200 GB disk.
+| Role          | vCPUs | RAM        | Storage       |
+|---------------|-------|------------|----------------|
+| Validator     | 32    | 128 GB     | 1 TB SSD       |
+| Non-Validator | 16    | 64 GB      | 500 GB SSD     |
 
 Currently only Ubuntu 24.04 is supported.
 
