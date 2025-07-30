@@ -3,8 +3,8 @@
 ## Machine Specs
 | Role          | vCPUs | RAM        | Storage       |
 |---------------|-------|------------|----------------|
-| Validator     | 64    | 128 GB     | 1 TB SSD       |
-| Non-Validator | 32    | 64 GB      | 500 GB SSD     |
+| Validator     | 32    | 128 GB     | 1 TB SSD       |
+| Non-Validator | 16    | 64 GB      | 500 GB SSD     |
 
 Currently only Ubuntu 24.04 is supported.
 
