@@ -1,10 +1,11 @@
 # Running a node
 
 ## Machine Specs
-| Role          | vCPUs | RAM        | Storage       |
-|---------------|-------|------------|----------------|
-| Validator     | 32    | 128 GB     | 1 TB SSD       |
-| Non-Validator | 16    | 64 GB      | 500 GB SSD     |
+
+| Role          | vCPUs | RAM    | Storage    |
+| ------------- | ----- | ------ | ---------- |
+| Validator     | 32    | 128 GB | 1 TB SSD   |
+| Non-Validator | 16    | 64 GB  | 500 GB SSD |
 
 Currently only Ubuntu 24.04 is supported.
 
@@ -17,6 +18,7 @@ For lowest latency, run the node in Tokyo, Japan.
 ## Setup
 
 ### Configure Chain
+
 For testing, configure your chain as follows:
 
 - **Testnet**:
@@ -29,6 +31,7 @@ For testing, configure your chain as follows:
   ```
 
 ### Download the Visor Binary
+
 The visor binary spawns and manages the child node process.
 
 - **Testnet**:
@@ -47,13 +50,13 @@ The visor binary spawns and manages the child node process.
 Binaries are signed for extra security. The public key is found at `pub_key.asc` in this repo.
 
 1. **Import the Key:**
+
    ```bash
    gpg --import pub_key.asc
    ```
 
 2. **Verify the Binary:**
    Signatures are located at `{binary}.asc`.
-
    - **Testnet**:
      ```bash
      curl https://binaries.hyperliquid-testnet.xyz/Testnet/hl-visor.asc > hl-visor.asc
@@ -91,18 +94,19 @@ For more information about examples and all the data types that can be written, 
 
 - **Transaction Blocks:**
   Blocks parsed as transactions are streamed to:
+
   ```
   ~/hl/data/replica_cmds/{start_time}/{date}/{height}
   ```
 
 - **State Snapshots:**
   State snapshots are saved every 10,000 blocks to:
+
   ```
   ~/hl/data/periodic_abci_states/{date}/{height}.rmp
   ```
 
   To translate the state to JSON for examination:
-
   - **Testnet**:
     ```bash
     ./hl-node --chain Testnet translate-abci-state ~/hl/data/periodic_abci_states/{date}/{height}.rmp /tmp/out.json
@@ -113,9 +117,10 @@ For more information about examples and all the data types that can be written, 
     ```
 
   To compute L4 book snapshots (full onchain order information) from a state snapshot file:
-    ```bash
-    ./hl-node --chain <chain> compute-l4-snapshots <abci-state-path> <out-path>
-    ```
+
+  ```bash
+  ./hl-node --chain <chain> compute-l4-snapshots <abci-state-path> <out-path>
+  ```
 
 ---
 
@@ -139,6 +144,7 @@ When running validators or non-validators, you can use the following flags. The 
 - `--serve-info`: Enables local HTTP server to handle info requests (see next section).
 
 For example, to run a non-validator with all flags enabled:
+
 ```bash
 ~/hl-visor run-non-validator --write-trades --write-order-statuses --serve-eth-rpc
 ```
@@ -150,11 +156,13 @@ For example, to run a non-validator with all flags enabled:
 ## EVM and Info servers
 
 Enable the EVM JSON-RPC by adding the `--serve-eth-rpc` flag:
+
 ```bash
 ~/hl-visor run-non-validator --serve-eth-rpc
 ```
 
 Once running, you can send RPC requests. For example, to retrieve the latest block:
+
 ```bash
 curl -X POST --header 'Content-Type: application/json' --data '{"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false],"id":1}' http://localhost:3001/evm
 ```
@@ -165,6 +173,7 @@ Running a local info server can help with rate limits and reduces trust assumpti
 Currently the local server only supports a subset of requests that are entirely a function of local state. In particular, historical time series queries and websockets are not currently supported. The `--write-*` flags on the node can be used for historical and streaming purposes.
 
 The currently supported info requests on the local server are
+
 ```
     meta
     spotMeta
@@ -208,6 +217,7 @@ To ensure that the server information is up to date, `exchangeStatus` can be pin
 ## Delegation
 
 The native token on Testnet is **HYPE** with token address:
+
 ```
 0x7317beb7cceed72ef0b346074cc8e7ab
 ```
@@ -256,26 +266,30 @@ The native token on Testnet is **HYPE** with token address:
      ```bash
      ./hl-node --chain Mainnet --key <delegator-wallet-key> staking-withdrawal <wei>
      ```
+
    The withdrawal will reflect in the exchange balance automatically once the unbonding period ends.
 
 ---
 
 ## Running a Validating Node
 
-*Note: The non-validating node setup above is a prerequisite for running a validating node.*
+_Note: The non-validating node setup above is a prerequisite for running a validating node._
 
 ### Generate Config
 
 Generate two wallets:
+
 - **Validator wallet:** Holds funds and receives delegation rewards (cold wallet).
 - **Signer wallet:** Used solely for signing consensus messages (hot wallet).
 
 They can be the same wallet for simplicity.
 
 Create a config file for the signer wallet:
+
 ```bash
 echo '{"key": "<signer-key>"}' > ~/hl/hyperliquid_data/node_config.json
 ```
+
 Keep both `<signer-key>` and `<validator-key>` secure.
 
 ### Ensure Validator User Exists
@@ -300,11 +314,13 @@ The validator set on Testnet is entirely permissionless.
 - **Register and Self-Delegate:**
 
   On **Testnet** (self-delegate 10_000, i.e. 1000000000000 wei):
+
   ```bash
   ~/hl-node --chain Testnet --key <validator-key> send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "signer": "<signer-address>", "name": "...", "description": "..." }, "initial_wei": 1000000000000}}'
   ```
 
   On **Mainnet**:
+
   ```bash
   ~/hl-node --chain Mainnet --key <validator-key> send-signed-action '{"type": "CValidatorAction", "register": {"profile": {"node_ip": {"Ip": "1.2.3.4"}, "signer": "<signer-address>", "name": "...", "description": "..." }, "initial_wei": 1000000000000}}'
   ```
@@ -323,6 +339,7 @@ Make sure ports 4000-4010 are open to other validators. (Currently, only ports 4
   ```
 
 > **Debugging Tip:** To see stderr immediately and disable restarts, run:
+>
 > - **Testnet:**
 >   ```bash
 >   ./hl-node --chain Testnet run-validator
@@ -333,6 +350,7 @@ Make sure ports 4000-4010 are open to other validators. (Currently, only ports 4
 >   ```
 
 For faster bootstrapping, use a known reliable peer. `reserved_peer_ips` can be set by the peer to always allow incoming connections from specific IPs.
+
 - **Testnet:**
   ```bash
   echo '{ "root_node_ips": [{"Ip": "1.2.3.4"}], "try_new_peers": false, "chain": "Testnet", "reserved_peer_ips": [] }' > ~/override_gossip_config.json
@@ -345,9 +363,11 @@ For faster bootstrapping, use a known reliable peer. `reserved_peer_ips` can be 
 ### Begin Validating
 
 When first registered or after changing your IP, the validator is automatically jailed (i.e. it does not participate in consensus initially). Once you see the expected outputs streaming to:
+
 ```
 ~/hl/data/node_logs/consensus/hourly/{date}/{hour}
 ```
+
 send the following action to begin participating in consensus:
 
 - **Testnet:**
@@ -406,6 +426,7 @@ Sentry nodes should be run by the validator themselves, and can be used as publi
 The directory `node_logs/consensus` contains most messages sent and received by the consensus algorithm, which is often useful for debugging.
 
 For example, to check whether Vote messages were sent to validator `0x5ac9...` around `2024-12-10T09:25`, you can run:
+
 ```bash
 grep destination...0x5ac9 ~/hl/data/node_logs/consensus/hourly/20241210/9 | grep T09:25 | grep Vote
 ```
@@ -413,6 +434,7 @@ grep destination...0x5ac9 ~/hl/data/node_logs/consensus/hourly/20241210/9 | grep
 Validators with issues may experience timeouts on rounds when they do not propose a block. Searching for `suspect` in the consensus logs can help pinpoint the cause, which is often correlated with jailing.
 
 Crash logs from the child process are written to:
+
 ```
 ~/hl/data/visor_child_stderr/{date}/{node_binary_index}
 ```
@@ -442,6 +464,7 @@ To change your validator profile (for example, updating your IP address):
   ```
 
 Other validator profile options include:
+
 - `disable_delegations`: Disables delegations when set to true.
 - `commission_bps`: Sets the percentage of staking rewards the validator takes before the remainder is distributed proportionally to stake delegated (defaults to 10000, meaning all rewards go to the validator, and is not allowed to increase).
 - `signer`: Allows the validator to set a hot address for signing consensus messages.
@@ -451,43 +474,46 @@ Other validator profile options include:
 ## Mainnet Non-Validator Seed Peers
 
 The community runs several independent root peers for non-validators to connect to on Mainnet. To run a non-validator on Mainnet, add at least one of these IP addresses to your `~/override_gossip_config.json`:
-```
-operator_name,root_ips
-ASXN,64.31.48.111
-ASXN,64.31.51.137
-B-Harvest,180.189.55.18
-B-Harvest,180.189.55.19
-Nansen x HypurrCollective,46.105.222.166
-Nansen x HypurrCollective,91.134.41.52
-Hypurrscan,13.230.78.76
-Hypurrscan,54.248.41.39
-Infinite Field,52.68.71.160
-Infinite Field,13.114.116.44
-LiquidSpirit x Rekt Gang,199.254.199.190
-LiquidSpirit x Rekt Gang,199.254.199.247
-Imperator.co,23.81.40.69
-Imperator.co,157.90.207.92
-Enigma,148.251.76.7
-Enigma,109.123.230.189
-TMNT,31.223.196.172
-TMNT,31.223.196.238
-HyperStake,91.134.71.237
-HyperStake,57.129.140.247
-ValiDAO,160.202.131.51
-ValiDAO,72.46.87.141
-Hyperbeat x P2P.org x Hypio,199.254.199.12
-Hyperbeat x P2P.org x Hypio,199.254.199.54
-Luganodes,45.250.255.111
-Luganodes,109.94.99.131
-HypurrCorea: SKYGG x DeSpread,8.220.222.129
-HypurrCorea: SKYGG x DeSpread,8.220.213.65
-```
+
+| Operator                      | Root IP         | Location       |
+| ----------------------------- | --------------- | -------------- |
+| ASXN                          | 64.31.48.111    | Japan          |
+| ASXN                          | 64.31.51.137    | Japan          |
+| B-Harvest                     | 180.189.55.18   | South Korea    |
+| B-Harvest                     | 180.189.55.19   | South Korea    |
+| Nansen x HypurrCollective     | 46.105.222.166  | France         |
+| Nansen x HypurrCollective     | 91.134.41.52    | France         |
+| Hypurrscan                    | 13.230.78.76    | Japan          |
+| Hypurrscan                    | 54.248.41.39    | Japan          |
+| Infinite Field                | 52.68.71.160    | Japan          |
+| Infinite Field                | 13.114.116.44   | Japan          |
+| LiquidSpirit x Rekt Gang      | 199.254.199.190 | Japan          |
+| LiquidSpirit x Rekt Gang      | 199.254.199.247 | Japan          |
+| Imperator.co                  | 23.81.40.69     | Japan          |
+| Imperator.co                  | 157.90.207.92   | Germany        |
+| Enigma                        | 148.251.76.7    | Germany        |
+| Enigma                        | 109.123.230.189 | Japan          |
+| TMNT                          | 31.223.196.172  | Japan          |
+| TMNT                          | 31.223.196.238  | Japan          |
+| HyperStake                    | 91.134.71.237   | France         |
+| HyperStake                    | 57.129.140.247  | United Kingdom |
+| ValiDAO                       | 160.202.131.51  | Germany        |
+| ValiDAO                       | 72.46.87.141    | Singapore      |
+| Hyperbeat x P2P.org x Hypio   | 199.254.199.12  | Japan          |
+| Hyperbeat x P2P.org x Hypio   | 199.254.199.54  | Japan          |
+| Luganodes                     | 45.250.255.111  | Japan          |
+| Luganodes                     | 109.94.99.131   | Japan          |
+| HypurrCorea: SKYGG x DeSpread | 8.220.222.129   | South Korea    |
+| HypurrCorea: SKYGG x DeSpread | 8.220.213.65    | South Korea    |
+| Purrposeful x HyBridge x PiP  | 144.168.36.162  | Japan          |
+| Purrposeful x HyBridge x PiP  | 181.41.140.106  | Japan          |
 
 ---
 
 ## Troubleshooting
 
 Crash logs from the child process are written to:
+
 ```
 ~/hl/data/visor_child_stderr/{date}/{node_binary_index}
 ```
