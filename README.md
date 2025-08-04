@@ -206,6 +206,21 @@ The currently supported info requests on the local server are
     webData2 (does not compute assetCtxs, which do not depend on the user)
 ```
 
+The info server also supports requests that writes down large local snapshot data to a file. This can be a better way to get snapshot data if an info server is running, because it uses the latest state instead of an older snapshot file.
+
+The info request format is:
+
+```
+    {"type": "fileSnapshot", "request": <SnapshotRequest>, "outPath": <string>, "includeHeightInOutput": <bool>}
+```
+
+`<SnapshotRequest>` format is:
+
+```
+    {"type": "referrerStates"}
+    {"type": "l4Snapshots", "includeUsers": <bool>, "includeTriggerOrders": <bool>}
+```
+
 Some info requests such as `l2Book` are not currently supported, as they are only indexed by a small number of assets and can be easily polled or subscribed to within the standard rate limits.
 
 To ensure that the server information is up to date, `exchangeStatus` can be pinged periodically to compare L1 and local timestamps. The server information can be ignored when the L1 timestamp returned is sufficiently stale.
