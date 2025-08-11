@@ -502,8 +502,8 @@ The community runs several independent root peers for non-validators to connect 
 | Hypurrscan                    | 54.248.41.39    | Japan          |
 | Infinite Field                | 52.68.71.160    | Japan          |
 | Infinite Field                | 13.114.116.44   | Japan          |
-| LiquidSpirit x Rekt Gang      | 199.254.199.190 | Japan          |
-| LiquidSpirit x Rekt Gang      | 199.254.199.247 | Japan          |
+| LiquidSpirit x Rekt Gang      | 79.127.159.173 | Japan          |
+| LiquidSpirit x Rekt Gang      | 79.127.159.174 | Japan          |
 | Imperator.co                  | 23.81.40.69     | Japan          |
 | Imperator.co                  | 157.90.207.92   | Germany        |
 | Enigma                        | 148.251.76.7    | Germany        |
