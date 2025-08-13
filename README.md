@@ -512,7 +512,7 @@ The community runs several independent root peers for non-validators to connect 
 | TMNT                          | 31.223.196.238  | Japan          |
 | HyperStake                    | 91.134.71.237   | France         |
 | HyperStake                    | 57.129.140.247  | United Kingdom |
-| ValiDAO                       | 160.202.131.51  | Germany        |
+| ValiDAO                       | 67.213.123.85   | Japan          |
 | ValiDAO                       | 72.46.87.141    | Singapore      |
 | Hyperbeat x P2P.org x Hypio   | 199.254.199.12  | Japan          |
 | Hyperbeat x P2P.org x Hypio   | 199.254.199.54  | Japan          |
