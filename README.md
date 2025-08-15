@@ -134,6 +134,7 @@ When running validators or non-validators, you can use the following flags. The 
 - `--write-raw-book-diffs`: Writes every L1 order diff to `~/hl/data/node_raw_book_diffs/hourly/{date}/{hour}`. Note that raw book diffs can be a substantial amount of data.
 - `--write-misc-events`: Writes miscellaneous event data to `~/hl/data/misc_events/hourly/{date}/{hour}`. See [docs](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/nodes/reading-l1-data#miscellaneous-events) for more details.
 - `--batch-by-block`: Writes the above files with one block per line instead of one event per line. The batched data schema is `{local_time, block_time, block_number, events}`, where `events` is a list.
+- `--stream-with-block-info`: Writes evemts as they are processed instead of once per block, but uses the same data schema as `--batch-by-block` to include block metadata.
 - `--replica-cmds-style`: Configures what is written to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`.
   Options:
   - `actions` (default) – only actions
