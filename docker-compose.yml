@@ -5,16 +5,21 @@ services:
     restart: unless-stopped
     build: .
     ports:
-      - "4000-4010:4000-4010"
+      - 4000-4010:4000-4010
+      - 3001:3001
     volumes:
       - hl-data:/home/hluser/hl/data
+    env_file:
+      - config.env
+    command: ["/bin/bash", "-c", "/home/hluser/init.sh && /home/hluser/hl-visor run-non-validator"]
 
   pruner:
     restart: unless-stopped
     build: ./pruner
     volumes:
       - hl-data:/home/hluser/hl/data
-
+    env_file:
+      - config.env
 
 volumes:
   hl-data:
