@@ -45,8 +45,8 @@ fi
 # Create gossip configuration
 echo "Creating gossip configuration..."
 # Convert comma-separated IPs to JSON array
-ROOT_IPS=$(echo "${ROOT_NODE_IPS:-64.31.48.111,64.31.51.137}" | sed 's/,/",{"Ip":"/g')
-RESERVED_IPS=$(echo "${RESERVED_PEER_IPS:-}" | sed 's/,/",{"Ip":"/g')
+ROOT_IPS=$(echo "${ROOT_NODE_IPS:-64.31.48.111,64.31.51.137}" | sed 's/,/"},{"Ip":"/g')
+RESERVED_IPS=$(echo "${RESERVED_PEER_IPS:-}" | sed 's/,/"},{"Ip":"/g')
 
 cat > /home/hluser/override_gossip_config.json << EOF
 {
