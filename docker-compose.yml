@@ -11,6 +11,7 @@ services:
       - 3001:3001
     volumes:
       - hl-data:/home/hluser/hl/data
+      - ./cursor:/home/hluser/cursor
     env_file:
       - script/config.env
     environment:

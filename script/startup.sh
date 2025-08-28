@@ -39,13 +39,8 @@ EOF
 EOF
     fi
 else
-    cat > /home/hluser/override_gossip_config.json << EOF
-{
-  "try_new_peers": ${TRY_NEW_PEERS:-true},
-  "chain": "$(echo "${HL_NETWORK:-testnet}" | sed 's/^./\U&/')",
-  "reserved_peer_ips": []
-}
-EOF
+    # Testnet: Skip creating override_gossip_config.json file
+    echo "Testnet: Skipping seed node configuration, using default network discovery"
 fi
 
 echo "Configuration files created"
