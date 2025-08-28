@@ -17,17 +17,36 @@ else
 fi
 
 # Create gossip configuration
-ROOT_IPS=$(echo "${ROOT_NODE_IPS:-64.31.48.111,64.31.51.137}" | sed 's/,/"},{"Ip":"/g')
-RESERVED_IPS=$(echo "${RESERVED_PEER_IPS:-}" | sed 's/,/"},{"Ip":"/g')
-
-cat > /home/hluser/override_gossip_config.json << EOF
+if [ "${HL_NETWORK:-testnet}" = "mainnet" ]; then
+    if [ -n "${ROOT_NODE_IPS:-}" ]; then
+        ROOT_NODES=$(echo "${ROOT_NODE_IPS}" | sed 's/,/"},{"Ip":"/g')
+        ROOT_NODES="[{\"Ip\":\"${ROOT_NODES}\"}]"
+        cat > /home/hluser/override_gossip_config.json << EOF
 {
-  "root_node_ips": [{"Ip":"64.31.48.111"},{"Ip":"64.31.51.137"}],
+  "root_node_ips": ${ROOT_NODES},
   "try_new_peers": ${TRY_NEW_PEERS:-true},
   "chain": "$(echo "${HL_NETWORK:-testnet}" | sed 's/^./\U&/')",
   "reserved_peer_ips": []
 }
 EOF
+    else
+        cat > /home/hluser/override_gossip_config.json << EOF
+{
+  "try_new_peers": ${TRY_NEW_PEERS:-true},
+  "chain": "$(echo "${HL_NETWORK:-testnet}" | sed 's/^./\U&/')",
+  "reserved_peer_ips": []
+}
+EOF
+    fi
+else
+    cat > /home/hluser/override_gossip_config.json << EOF
+{
+  "try_new_peers": ${TRY_NEW_PEERS:-true},
+  "chain": "$(echo "${HL_NETWORK:-testnet}" | sed 's/^./\U&/')",
+  "reserved_peer_ips": []
+}
+EOF
+fi
 
 echo "Configuration files created"
 
