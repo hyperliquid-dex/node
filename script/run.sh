@@ -174,7 +174,6 @@ show_data() {
         echo -e "${YELLOW}Recent data files:${NC}"
         docker exec hyperliquid-node find /home/hluser/hl/data -type f -mtime -1 -ls 2>/dev/null | head -10 || echo -e "${RED}Failed to list recent files${NC}"
     else
-        echo -e "${YELLOW}Service is not running - showing host data directory:${NC}"
         echo ""
 
                 # Show Docker volume information when service is not running

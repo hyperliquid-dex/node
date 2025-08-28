@@ -12,7 +12,7 @@ services:
     volumes:
       - hl-data:/home/hluser/hl/data
     env_file:
-      - config.env
+      - script/config.env
     environment:
       - RUST_BACKTRACE=full
     user: 10000:10000
@@ -24,7 +24,7 @@ services:
     volumes:
       - hl-data:/home/hluser/hl/data
     env_file:
-      - config.env
+      - script/config.env
 
 volumes:
   hl-data:

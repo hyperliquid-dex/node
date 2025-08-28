@@ -15,12 +15,12 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && chmod 0440 /etc/sudoers.d/$USERNAME
 
 # Copy initialization script
-COPY init.sh /home/$USERNAME/
+COPY script/init.sh /home/$USERNAME/
 RUN chmod +x /home/$USERNAME/init.sh \
     && chown $USERNAME:$USERNAME /home/$USERNAME/init.sh
 
 # Copy startup script
-COPY startup.sh /home/$USERNAME/
+COPY script/startup.sh /home/$USERNAME/
 RUN chmod +x /home/$USERNAME/startup.sh \
     && chown $USERNAME:$USERNAME /home/$USERNAME/startup.sh
 
