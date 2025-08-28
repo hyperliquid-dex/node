@@ -2,6 +2,7 @@ name: hyperliquid
 
 services:
   node:
+    container_name: hyperliquid-node
     restart: unless-stopped
     platform: linux/amd64
     build: .
@@ -9,14 +10,22 @@ services:
       - 4000-4010:4000-4010
       - 3001:3001
     volumes:
-      - ${HL_DATA_DIR:-./hl-data}:/home/hluser/hl/data
+      - hl-data:/home/hluser/hl/data
     env_file:
       - config.env
+    environment:
+      - RUST_BACKTRACE=full
+    user: 10000:10000
 
   pruner:
+    container_name: hyperliquid-pruner
     restart: unless-stopped
     build: ./pruner
     volumes:
-      - ${HL_DATA_DIR:-./hl-data}:/home/hluser/hl/data
+      - hl-data:/home/hluser/hl/data
     env_file:
       - config.env
+
+volumes:
+  hl-data:
+    driver: local

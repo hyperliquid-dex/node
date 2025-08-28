@@ -9,7 +9,7 @@ echo "Initializing Hyperliquid Node environment..."
 # Download and import GPG public key
 echo "Downloading and importing GPG public key..."
 curl -o /home/hluser/pub_key.asc "${PUB_KEY_URL:-https://raw.githubusercontent.com/hyperliquid-dex/node/refs/heads/main/pub_key.asc}"
-su - hluser -c "gpg --import /home/hluser/pub_key.asc"
+gpg --import /home/hluser/pub_key.asc
 
 # Download and verify binaries based on network type
 if [ "${HL_NETWORK:-testnet}" = "mainnet" ]; then
@@ -24,7 +24,7 @@ fi
 
 # Verify binary and set permissions
 echo "Verifying binary and setting permissions..."
-su - hluser -c "gpg --verify /home/hluser/hl-visor.asc /home/hluser/hl-visor"
+gpg --verify /home/hluser/hl-visor.asc /home/hluser/hl-visor
 chmod +x /home/hluser/hl-visor
 
 # Create initial configuration
