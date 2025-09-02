@@ -489,7 +489,15 @@ Other validator profile options include:
 
 ## Mainnet Non-Validator Seed Peers
 
-The community runs several independent root peers for non-validators to connect to on Mainnet. To run a non-validator on Mainnet, add at least one of these IP addresses to your `~/override_gossip_config.json`:
+To run a non-validator on Mainnet, there must be at least one IP address in `~/override_gossip_config.json`.
+
+A list of recently available peers can be queried via the API:
+
+```bash
+curl -X POST --header "Content-Type: application/json" --data '{ "type": "gossipRootIps" }' https://api.hyperliquid.xyz/info
+```
+
+The validator community also runs several independent root peers for non-validators to connect to on Mainnet. 
 
 | Operator                      | Root IP         | Location       |
 | ----------------------------- | --------------- | -------------- |
