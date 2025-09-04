@@ -505,8 +505,8 @@ The validator community also runs several independent root peers for non-validat
 | ASXN                          | 64.31.51.137    | Japan          |
 | B-Harvest                     | 180.189.55.18   | South Korea    |
 | B-Harvest                     | 180.189.55.19   | South Korea    |
-| Nansen x HypurrCollective     | 46.105.222.166  | France         |
-| Nansen x HypurrCollective     | 91.134.41.52    | France         |
+| Nansen x HypurrCollective     | 34.84.25.59     | Japan          |
+| Nansen x HypurrCollective     | 34.146.230.150  | Japan          |
 | Hypurrscan                    | 13.230.78.76    | Japan          |
 | Hypurrscan                    | 54.248.41.39    | Japan          |
 | Infinite Field                | 52.68.71.160    | Japan          |
