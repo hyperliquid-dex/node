@@ -511,8 +511,8 @@ The validator community also runs several independent root peers for non-validat
 | Hypurrscan                    | 54.248.41.39    | Japan          |
 | Infinite Field                | 52.68.71.160    | Japan          |
 | Infinite Field                | 13.114.116.44   | Japan          |
-| LiquidSpirit x Rekt Gang      | 79.127.159.173 | Japan          |
-| LiquidSpirit x Rekt Gang      | 79.127.159.174 | Japan          |
+| LiquidSpirit x Rekt Gang      | 79.127.159.173  | Japan          |
+| LiquidSpirit x Rekt Gang      | 79.127.159.174  | Japan          |
 | Imperator.co                  | 23.81.40.69     | Japan          |
 | Imperator.co                  | 157.90.207.92   | Germany        |
 | Enigma                        | 148.251.76.7    | Germany        |
@@ -531,6 +531,8 @@ The validator community also runs several independent root peers for non-validat
 | HypurrCorea: SKYGG x DeSpread | 15.235.231.247  | Singapore      |
 | Purrposeful x HyBridge x PiP  | 144.168.36.162  | Japan          |
 | Purrposeful x HyBridge x PiP  | 181.41.140.106  | Japan          |
+| Kinetiq x Hyperion            | 34.146.1.144    | Japan          |
+| Kinetiq x Hyperion            | 15.235.232.101  | Singapore      |
 
 ---
 
