@@ -497,7 +497,7 @@ A list of recently available peers can be queried via the API:
 curl -X POST --header "Content-Type: application/json" --data '{ "type": "gossipRootIps" }' https://api.hyperliquid.xyz/info
 ```
 
-The validator community also runs several independent root peers for non-validators to connect to on Mainnet. 
+The validator community also runs several independent root peers for non-validators to connect to on Mainnet.
 
 | Operator                      | Root IP         | Location       |
 | ----------------------------- | --------------- | -------------- |
@@ -529,8 +529,8 @@ The validator community also runs several independent root peers for non-validat
 | Luganodes                     | 109.94.99.131   | Japan          |
 | HypurrCorea: SKYGG x DeSpread | 23.81.41.3      | Japan          |
 | HypurrCorea: SKYGG x DeSpread | 15.235.231.247  | Singapore      |
-| Purrposeful x HyBridge x PiP  | 144.168.36.162  | Japan          |
-| Purrposeful x HyBridge x PiP  | 181.41.140.106  | Japan          |
+| Purrposeful x HyBridge x PiP  | 199.254.199.48  | Japan          |
+| Purrposeful x HyBridge x PiP  | 199.254.199.52  | Japan          |
 | Kinetiq x Hyperion            | 34.146.1.144    | Japan          |
 | Kinetiq x Hyperion            | 15.235.232.101  | Singapore      |
 
