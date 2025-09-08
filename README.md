@@ -4,14 +4,13 @@
 
 | Role          | vCPUs | RAM    | Storage    |
 | ------------- | ----- | ------ | ---------- |
-| Validator     | 32    | 128 GB | 1 TB SSD   |
-| Non-Validator | 16    | 64 GB  | 500 GB SSD |
+| Validator     | 32    | 128 GB | 1 TB NVMe/SSD   |
+| Non-Validator | 16    | 64 GB  | 800 GB NVMe/SSD |
 
-Currently only Ubuntu 24.04 is supported.
-
-Ports 4001 and 4002 are used for gossip and must be open to the public. Otherwise, the node IP address will be deprioritized by peers in the p2p network.
-
-For lowest latency, run the node in Tokyo, Japan.
+- Currently only Ubuntu 24.04 is supported.
+- Storage grows by around ~330 GB daily(As at 25th August 2025).
+- Ports 4001 and 4002 are used for gossip and must be open to the public. Otherwise, the node IP address will be deprioritized by peers in the p2p network.
+- For lowest latency, run the node in Tokyo, Japan.
 
 ---
 
