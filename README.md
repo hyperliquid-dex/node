@@ -502,6 +502,8 @@ The validator community also runs several independent root peers for non-validat
 
 | Operator                      | Root IP         | Location       |
 | ----------------------------- | --------------- | -------------- |
+| NodeOps                       | 167.71.41.118   | Frankfurt      |
+| NodeOps                       | 95.217.197.226  | Helsinki       |
 | ASXN                          | 64.31.48.111    | Japan          |
 | ASXN                          | 64.31.51.137    | Japan          |
 | B-Harvest                     | 180.189.55.18   | South Korea    |
