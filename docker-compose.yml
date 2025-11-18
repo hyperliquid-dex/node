@@ -12,9 +12,11 @@ services:
   pruner:
     restart: unless-stopped
     build: ./pruner
+    environment:
+      - AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION:-us-east-1}
+      - S3_BUCKET=${S3_BUCKET:-s3://defi-app-hyperliquid-node}
     volumes:
       - hl-data:/home/hluser/hl/data
-
 
 volumes:
   hl-data:

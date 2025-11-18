@@ -1,0 +1,2 @@
+*/15 * * * * /bin/bash -c '/home/hluser/scripts/s3_sync.sh > /proc/1/fd/1 2>&1'
+
