@@ -415,9 +415,9 @@ Once jailed, a validator can only be unjailed through the `unjailSelf` action (w
 
 If a validator repeatedly gets jailed, check stdout for signs of crashing or other unusual logs. Also, logs in `~/hl/data/node_logs/status/` may help diagnose latency or connectivity issues.
 
-### Publish AQA Rate
+### Publish Aligned Quote Asset Rate
 
-To support [aligned quote assets](https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/aligned-quote-assets) validators run [`aqa-publisher`](https://github.com/native-markets/aqa-publisher). This binary is a reference implementation of AQA rate publishing. Votes are published by active validators once per day at 22:00 UTC via [`validatorL1Stream`](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint#validator-vote-on-risk-free-rate-for-aligned-quote-asset) action.
+To support [aligned quote assets](https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/aligned-quote-assets) validators run [`aqa-publisher`](https://github.com/native-markets/aqa-publisher). This binary is a reference implementation of aligned quote asset rate publishing. Votes are published by active validators once per day at 22:00 UTC via [`validatorL1Stream`](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/exchange-endpoint#validator-vote-on-risk-free-rate-for-aligned-quote-asset) action. Validators should publish this rate using a dedicated agent key, run on a separate machine from the validating node.
 
 ```bash
 # Clone reference implementation
