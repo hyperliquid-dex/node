@@ -527,7 +527,7 @@ The validator community also runs several independent root peers for non-validat
 | Nansen x HypurrCollective     | 34.84.25.59     | Japan          |
 | Nansen x HypurrCollective     | 34.146.230.150  | Japan          |
 | Hypurrscan                    | 13.230.78.76    | Japan          |
-| Hypurrscan                    | 54.248.41.39    | Japan          |
+| Hypurrscan                    | 52.195.133.97   | Japan          |
 | Infinite Field                | 52.68.71.160    | Japan          |
 | Infinite Field                | 13.114.116.44   | Japan          |
 | LiquidSpirit x Rekt Gang      | 79.127.159.173  | Japan          |
