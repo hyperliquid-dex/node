@@ -32,8 +32,13 @@ RUN curl -o /home/$USERNAME/hl-visor $HL_VISOR_URL \
     && gpg --verify /home/$USERNAME/hl-visor.asc /home/$USERNAME/hl-visor \
     && chmod +x /home/$USERNAME/hl-visor
 
+# Expose rpc port
+EXPOSE 3001
 # Expose gossip ports
 EXPOSE 4000-4010
 
 # Run a non-validating node
 ENTRYPOINT ["/home/hluser/hl-visor", "run-non-validator", "--replica-cmds-style", "recent-actions"]
+
+# Optional: Run a non-validating node with EVM RPC enabled (if using, comment out the above line and uncomment this one)
+# ENTRYPOINT ["/home/hluser/hl-visor", "run-non-validator", "--serve-eth-rpc", "--replica-cmds-style", "recent-actions"]
