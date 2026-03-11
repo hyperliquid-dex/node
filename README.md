@@ -132,9 +132,9 @@ When running validators or non-validators, you can use the following flags. The 
 - `--write-fills`: Streams fills in the API fills format to `~/hl/data/node_fills/hourly/{date}/{hour}`. Also streams TWAP statuses to `~/hl/data/node_twap_statuses/{date}/{hour}`. This overrides `--write-trades` if both are set.
 - `--write-order-statuses`: Writes every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. Note that orders can be a substantial amount of data.
 - `--write-raw-book-diffs`: Writes every L1 order diff to `~/hl/data/node_raw_book_diffs/hourly/{date}/{hour}`. Note that raw book diffs can be a substantial amount of data.
-- `--write-hip3-oracle-updates`: Writes every HIP-3 deployer oracle update action to `~/hl/data/hip3_oracle_updates/hourly/{date}/{hour}`. 
+- `--write-hip3-oracle-updates`: Writes every HIP-3 deployer oracle update action to `~/hl/data/hip3_oracle_updates/hourly/{date}/{hour}`.
 - `--write-misc-events`: Writes miscellaneous event data to `~/hl/data/misc_events/hourly/{date}/{hour}`. See [docs](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/nodes/reading-l1-data#miscellaneous-events) for more details.
-- `--write-system-and-core-writer-actions`: Writes CoreWriter and HyperCore to HyperEVM transfer data indexed by HyperEVM tx hash and a unique system nonce to `~/hl/data/system_and_core_writer_actions/hourly/{date}/{hour}`. 
+- `--write-system-and-core-writer-actions`: Writes CoreWriter and HyperCore to HyperEVM transfer data indexed by HyperEVM tx hash and a unique system nonce to `~/hl/data/system_and_core_writer_actions/hourly/{date}/{hour}`.
 - `--batch-by-block`: Writes the above files with one block per line instead of one event per line. The batched data schema is `{local_time, block_time, block_number, events}`, where `events` is a list.
 - `--stream-with-block-info`: Writes events as they are processed instead of once per block, but uses the same data schema as `--batch-by-block` to include block metadata.
 - `--replica-cmds-style`: Configures what is written to `~/hl/data/replica_cmds/{start_time}/{date}/{height}`.
@@ -548,7 +548,7 @@ The validator community also runs several independent root peers for non-validat
 | HypurrCorea: SKYGG x DeSpread | 23.81.41.3      | Japan          |
 | HypurrCorea: SKYGG x DeSpread | 15.235.231.247  | Singapore      |
 | Purrposeful x HyBridge x PiP  | 199.254.199.48  | Japan          |
-| Purrposeful x HyBridge x PiP  | 199.254.199.52  | Japan          |
+| Purrposeful x HyBridge x PiP  | 64.34.83.57     | Japan          |
 | Kinetiq x Hyperion            | 15.235.232.101  | Singapore      |
 
 ---
