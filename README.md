@@ -129,7 +129,7 @@ For more information about examples and all the data types that can be written, 
 When running validators or non-validators, you can use the following flags. The data schemas for the output data are documented [here](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/nodes/l1-data-schemas).
 
 - `--write-trades`: Streams trades to `~/hl/data/node_trades/hourly/{date}/{hour}`.
-- `--write-fills`: Streams fills in the API fills format to `~/hl/data/node_fills/hourly/{date}/{hour}`. Also streams TWAP statuses to `~/hl/data/node_twap_statuses/{date}/{hour}`. This overrides `--write-trades` if both are set.
+- `--write-fills`: Streams fills in the API fills format to `~/hl/data/node_fills/hourly/{date}/{hour}`. Also streams TWAP statuses to `~/hl/data/node_twap_statuses/{date}/{hour}`. This overrides `--write-trades` if both are set. The `deployerFee` field is included for HIP-3 fills.
 - `--write-order-statuses`: Writes every L1 order status to `~/hl/data/node_order_statuses/hourly/{date}/{hour}`. Note that orders can be a substantial amount of data.
 - `--write-raw-book-diffs`: Writes every L1 order diff to `~/hl/data/node_raw_book_diffs/hourly/{date}/{hour}`. Note that raw book diffs can be a substantial amount of data.
 - `--write-hip3-oracle-updates`: Writes every HIP-3 deployer oracle update action to `~/hl/data/hip3_oracle_updates/hourly/{date}/{hour}`.
