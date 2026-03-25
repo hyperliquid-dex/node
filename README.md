@@ -543,7 +543,7 @@ The validator community also runs several independent root peers for non-validat
 | ValiDAO                       | 72.46.87.141    | Singapore      |
 | Hyperbeat x P2P.org x Hypio   | 199.254.199.12  | Japan          |
 | Hyperbeat x P2P.org x Hypio   | 199.254.199.54  | Japan          |
-| Luganodes                     | 45.250.255.111  | Japan          |
+| Luganodes                     | 35.74.132.113   | Japan          |
 | Luganodes                     | 109.94.99.131   | Japan          |
 | HypurrCorea: SKYGG x DeSpread | 23.81.41.3      | Japan          |
 | HypurrCorea: SKYGG x DeSpread | 15.235.231.247  | Singapore      |
