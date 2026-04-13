@@ -557,6 +557,8 @@ The validator community also runs several independent root peers for non-validat
 
 Latency sensitive users can set `split_client_blocks: true` in `~/override_gossip_config.json` to stream uncommitted mempool transactions to `~/hl/data/mempool_txs/{date}`. These transactions are eagerly broadcasted by nodes before they are committed, so the file does not contain responses. To record this data, all peers between the node and the validating network must have `split_client_blocks` enabled. On a future network upgrade, this setting may be enabled for all nodes without the configuration option.
 
+By default, mempool transactions are streamed in random order to peers. Nodes can set `{"enabled": true}` in `~/hl/file_mod_time_tracker/node_gossip_priority_config.json` to respect the onchain gossip auction priority ordering.
+
 ## Troubleshooting
 
 Crash logs from the child process are written to:
