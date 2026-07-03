@@ -548,6 +548,7 @@ The validator community also runs several independent root peers for non-validat
 | Purrposeful x HyBridge x PiP  | 199.254.199.48  | Japan          |
 | Purrposeful x HyBridge x PiP  | 64.34.83.57     | Japan          |
 | Kinetiq x Hyperion            | 15.235.232.101  | Singapore      |
+| Kinetiq x Hyperion            | 34.180.72.122   | Japan          |
 
 ---
 
