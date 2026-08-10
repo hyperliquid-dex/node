@@ -1,39 +1,51 @@
-FROM ubuntu:24.04
+FROM --platform=linux/amd64 ubuntu:24.04
 
 ARG USERNAME=hluser
 ARG USER_UID=10000
 ARG USER_GID=$USER_UID
 
-# Define URLs as environment variables
-ARG PUB_KEY_URL=https://raw.githubusercontent.com/hyperliquid-dex/node/refs/heads/main/pub_key.asc
-ARG HL_VISOR_URL=https://binaries.hyperliquid-testnet.xyz/Testnet/hl-visor
-ARG HL_VISOR_ASC_URL=https://binaries.hyperliquid-testnet.xyz/Testnet/hl-visor.asc
-
 # Create user and install dependencies
 RUN groupadd --gid $USER_GID $USERNAME \
     && useradd --uid $USER_UID --gid $USER_GID -m $USERNAME \
-    && apt-get update -y && apt-get install -y curl gnupg \
+    && apt-get update -y && apt-get install -y curl tree gnupg qemu-user-static binfmt-support sudo python3 python3-pip \
     && apt-get clean && rm -rf /var/lib/apt/lists/* \
-    && mkdir -p /home/$USERNAME/hl/data && chown -R $USERNAME:$USERNAME /home/$USERNAME/hl
+    && mkdir -p /home/$USERNAME/hl/data && chown -R $USERNAME:$USERNAME /home/$USERNAME/hl \
+    && chmod 755 /home/$USERNAME/hl/data \
+    && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/$USERNAME \
+    && chmod 0440 /etc/sudoers.d/$USERNAME
 
+# Install Poetry for hluser
+USER $USERNAME
+RUN curl -sSL --retry 3 --retry-delay 2 https://install.python-poetry.org | python3 - \
+    && echo "export PATH=\"/home/$USERNAME/.local/bin:\$PATH\"" >> /home/$USERNAME/.bashrc \
+    && /home/$USERNAME/.local/share/pypoetry/venv/bin/poetry --version
+
+# Switch back to root for remaining operations
+USER root
+
+# Copy initialization script
+COPY script/init.sh /home/$USERNAME/
+RUN chmod +x /home/$USERNAME/init.sh \
+    && chown $USERNAME:$USERNAME /home/$USERNAME/init.sh
+
+# Copy startup script
+COPY script/startup.sh /home/$USERNAME/
+RUN chmod +x /home/$USERNAME/startup.sh \
+    && chown $USERNAME:$USERNAME /home/$USERNAME/startup.sh
+
+# Switch to non-root user
 USER $USERNAME
 WORKDIR /home/$USERNAME
 
-# Configure chain to testnet
-RUN echo '{"chain": "Testnet"}' > /home/$USERNAME/visor.json
+# Set USERNAME environment variable
+ENV USERNAME=$USERNAME
 
-# Import GPG public key
-RUN curl -o /home/$USERNAME/pub_key.asc $PUB_KEY_URL \
-    && gpg --import /home/$USERNAME/pub_key.asc
+# Set PATH to include Poetry
+ENV PATH="/home/$USERNAME/.local/bin:$PATH"
 
-# Download and verify hl-visor binary
-RUN curl -o /home/$USERNAME/hl-visor $HL_VISOR_URL \
-    && curl -o /home/$USERNAME/hl-visor.asc $HL_VISOR_ASC_URL \
-    && gpg --verify /home/$USERNAME/hl-visor.asc /home/$USERNAME/hl-visor \
-    && chmod +x /home/$USERNAME/hl-visor
+# Run initialization as hluser
+RUN /home/$USERNAME/init.sh
 
-# Expose gossip ports
-EXPOSE 4000-4010
+CMD /home/$USERNAME/startup.sh
 
-# Run a non-validating node
-ENTRYPOINT ["/home/hluser/hl-visor", "run-non-validator", "--replica-cmds-style", "recent-actions"]
+EXPOSE 4000-4010 3001
