@@ -206,6 +206,7 @@ The currently supported info requests on the local server are
     validatorL1Votes
     marginTable
     perpDexs
+    userAbstraction
     webData2 (does not compute assetCtxs, which do not depend on the user)
 ```
 
