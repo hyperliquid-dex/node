@@ -19,4 +19,8 @@ COPY cron/ /etc/
 RUN chmod 0644 /etc/cron.d/* && \
     chmod +x /home/$USERNAME/scripts/* && chown -R $USERNAME:$USERNAME /home/$USERNAME/scripts
 
-CMD ["/usr/sbin/cron", "-f", "-L", "/dev/stdout"]
+# The cron job runs as $USERNAME, so it cannot write to root-owned /proc/1/fd/1.
+# Give it a log file it owns and relay that file to the container log instead.
+RUN touch /var/log/prune.log && chown $USERNAME:$USERNAME /var/log/prune.log
+
+CMD ["/bin/bash", "-c", "tail -F /var/log/prune.log & exec /usr/sbin/cron -f -L /dev/stdout"]
