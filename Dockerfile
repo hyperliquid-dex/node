@@ -1,4 +1,7 @@
-FROM ubuntu:24.04
+# hl-visor and hl-node are published as x86-64 binaries only, so the image must
+# be amd64 regardless of the host. Without this, building on an arm64 host (e.g.
+# Apple Silicon) silently produces an arm64 image that cannot exec hl-visor.
+FROM --platform=linux/amd64 ubuntu:24.04
 
 ARG USERNAME=hluser
 ARG USER_UID=10000
