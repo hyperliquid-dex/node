@@ -84,6 +84,18 @@ It may take a while as the node navigates the network to find an appropriate pee
 
 > **Note:** The same command is used regardless of whether your chain is set to Testnet or Mainnet (as configured in `~/visor.json`).
 
+### Mainnet Considerations
+
+When running a non-validator on Mainnet, you must configure at least one seed peer in `~/override_gossip_config.json`. Refer to the [Mainnet Non-Validator Seed Peers](#mainnet-non-validator-seed-peers) section for details and a list of available peers.
+
+### Rewards
+
+Running a non-validator node offers no protocol-level rewards. However, it provides several benefits:
+
+- **Data Access:** Read L1 data directly from your own node without relying on external providers.
+- **Performance:** Run a local EVM RPC or Info server for faster, private access to the network.
+- **Privacy:** Reduce trust assumptions by querying your own node for account and market information.
+
 ---
 
 ## Reading L1 Data
@@ -508,7 +520,12 @@ Other validator profile options include:
 
 ## Mainnet Non-Validator Seed Peers
 
-To run a non-validator on Mainnet, there must be at least one IP address in `~/override_gossip_config.json`.
+To run a non-validator on Mainnet, you must specify at least one seed peer IP address in `~/override_gossip_config.json`.
+
+For example, to use one of the ASXN nodes:
+```bash
+echo '{ "root_node_ips": [{"Ip": "64.31.48.111"}] }' > ~/override_gossip_config.json
+```
 
 A list of recently available peers can be queried via the API:
 
