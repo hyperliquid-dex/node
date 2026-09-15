@@ -539,8 +539,8 @@ The validator community also runs several independent root peers for non-validat
 | TMNT                          | 31.223.196.238  | Japan          |
 | ValiDAO                       | 72.46.87.141    | Singapore      |
 | Hyperbeat x P2P.org x Hypio   | 199.254.199.12  | Japan          |
-| Luganodes                     | 35.74.132.113   | Japan          |
-| Luganodes                     | 35.79.2.229     | Japan          |
+| Luganodes                     | 63.254.163.125  | Japan          |
+| Luganodes                     | 162.19.42.47    | France         |
 | HypurrCorea: SKYGG x DeSpread | 23.81.41.3      | Japan          |
 | HypurrCorea: SKYGG x DeSpread | 15.235.231.247  | Singapore      |
 | Purrposeful x HyBridge x PiP  | 199.254.199.48  | Japan          |
