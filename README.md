@@ -164,6 +164,8 @@ Enable the EVM JSON-RPC by adding the `--serve-eth-rpc` flag:
 ~/hl-visor run-non-validator --serve-eth-rpc
 ```
 
+Ensure that port 3001 is open in your local firewall if you are planning on accessing the EVM RPC from outside the node.
+
 Once running, you can send RPC requests. For example, to retrieve the latest block:
 
 ```bash
