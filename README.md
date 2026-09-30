@@ -534,7 +534,8 @@ The validator community also runs several independent root peers for non-validat
 | LiquidSpirit x Rekt Gang      | 199.254.199.194 | Japan          |
 | Imperator.co                  | 23.81.40.69     | Japan          |
 | Imperator.co                  | 212.95.58.62    | Germany        |
-| Enigma                        | 109.123.230.189 | Japan          |
+| Enigma - Hypedexer.com        | 202.182.118.56  | Japan          |
+| Enigma - Hypedexer.com        | 136.243.88.91   | Germany        |
 | TMNT                          | 31.223.196.172  | Japan          |
 | TMNT                          | 31.223.196.238  | Japan          |
 | ValiDAO                       | 72.46.87.141    | Singapore      |
