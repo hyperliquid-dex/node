@@ -523,7 +523,7 @@ The validator community also runs several independent root peers for non-validat
 | ASXN                          | 64.31.48.111    | Japan          |
 | ASXN                          | 64.31.51.137    | Japan          |
 | B-Harvest                     | 180.189.55.18   | South Korea    |
-| B-Harvest                     | 180.189.55.19   | South Korea    |
+| B-Harvest                     | 198.13.133.117  | Japan          |
 | Nansen x HypurrCollective     | 72.46.86.185    | Japan          |
 | Nansen x HypurrCollective     | 72.46.86.159    | Japan          |
 | Hypurrscan                    | 13.230.78.76    | Japan          |
