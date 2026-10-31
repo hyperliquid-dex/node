@@ -275,7 +275,7 @@ The native token on Testnet is **HYPE** with token address:
      Use the corresponding API endpoint for mainnet (if available).
 
 4. **Staking Withdrawal:**
-   Initiate a staking withdrawal (subject to a 5-minute unbonding period):
+   Initiate a staking withdrawal (subject to a 7-day unbonding period on Mainnet and 5 minutes on Testnet):
    - **Testnet:**
      ```bash
      ./hl-node --chain Testnet --key <delegator-wallet-key> staking-withdrawal <wei>
