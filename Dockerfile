@@ -35,5 +35,5 @@ RUN curl -o /home/$USERNAME/hl-visor $HL_VISOR_URL \
 # Expose gossip ports
 EXPOSE 4000-4010
 
-# Run a non-validating node
-ENTRYPOINT ["/home/hluser/hl-visor", "run-non-validator", "--replica-cmds-style", "recent-actions"]
+# Run the visor from WORKDIR so custom USERNAME builds use the same binary.
+ENTRYPOINT ["./hl-visor", "run-non-validator", "--replica-cmds-style", "recent-actions"]
